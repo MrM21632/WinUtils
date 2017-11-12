@@ -1,0 +1,21 @@
+# .gitignore for util_bin Repository
+# Written by Joshua Morrison (jmorrison708@comcast.net)
+
+# We're simply concerned with ignoring any instances of 'Debug' and 'Release'
+# folders, which includes 'x64' folders.
+Debug/
+Release/
+x64/
+
+# Test files for Factorization Utility, and additional folders for factor_cpp
+/factor/factor_cpp/factor_cpp/
+/factor/factor_c
+/factor/primality
+/factor/factor.py
+
+# We will ignore any and all Visual Studio files as well.
+.vs/
+*.sln
+*.VC.db
+*.vcxproj
+*.vcxproj.filters
