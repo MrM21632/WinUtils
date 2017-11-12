@@ -18,5 +18,4 @@ x64/
 *.sln
 *.VC.db
 *.vcxproj
-*.vcxproj.filters
-*.vcxproj.user
+*.vcxproj.*
