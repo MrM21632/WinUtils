@@ -1,5 +1,5 @@
 # .gitignore for util_bin Repository
-# Written by Joshua Morrison (jmorrison708@comcast.net)
+# Written by Joshua Morrison (MrM21632)
 
 # We're simply concerned with ignoring any instances of 'Debug' and 'Release'
 # folders, which includes 'x64' folders.

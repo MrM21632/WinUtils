@@ -4,7 +4,7 @@
  *
  * Version:     1.0.0
  * License:     Public Domain
- * Author:      Joshua Morrison (jmorrison708@comcast.net)
+ * Author:      Joshua Morrison (MrM21632)
  * Last Edited: 11/8/2017, 9:30pm
  */
 

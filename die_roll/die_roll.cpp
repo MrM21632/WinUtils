@@ -10,7 +10,7 @@
  *
  * Version:     1.1.0
  * License:     Public Domain
- * Author:      Joshua Morrison, 9-17-2017
+ * Author:      Joshua Morrison (MrM21632)
  * Last Edited: 11/4/2017, 5:00pm
  */
 
