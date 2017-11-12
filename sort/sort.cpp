@@ -34,12 +34,12 @@ int main(int argc, char** argv) {
     std::ofstream fout("sorted.txt");
     
     std::string s;
-	while (std::getline(fin, s)) {
-		lli x = static_cast<lli>(std::stoll(s));
-		data.push_back(x);
-	}
+    while (std::getline(fin, s)) {
+        lli x = static_cast<lli>(std::stoll(s));
+        data.push_back(x);
+    }
     
-	quicksort(data, 0, data.size() - 1);
+    quicksort(data, 0, data.size() - 1);
     
     for (std::vector<lli>::iterator vit = data.begin(); vit != data.end(); ++vit)
         fout << *vit << std::endl;
@@ -65,22 +65,22 @@ void swap(lli* x, lli* y) {
 // Quicksort
 void quicksort(std::vector<lli>& a, int lo, int hi) {
     if (lo < hi) {
-		lli pivot = a[(lo + hi) / 2];
-		int left = lo, right = hi;
+        lli pivot = a[(lo + hi) / 2];
+        int left = lo, right = hi;
 
-		while (left <= right) {
-			while (a[left] < pivot)
-				++left;
-			while (a[right] > pivot)
-				--right;
-			if (left <= right) {
-				swap(&a[left], &a[right]);
-				++left;
-				--right;
-			}
-		}
+        while (left <= right) {
+            while (a[left] < pivot)
+                ++left;
+            while (a[right] > pivot)
+                --right;
+            if (left <= right) {
+                swap(&a[left], &a[right]);
+                ++left;
+                --right;
+            }
+        }
 
-		quicksort(a, lo, right);
-		quicksort(a, left, hi);
+        quicksort(a, lo, right);
+        quicksort(a, left, hi);
     }
 }

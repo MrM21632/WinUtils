@@ -27,29 +27,29 @@
  *         until we finally return a value.
  */
 uint64_t gcd(uint64_t a, uint64_t b) {
-	// Base cases:
-	if (a == b)
-		return a;
-	if (a == 0)
-		return b;
-	if (b == 0)
-		return a;
+    // Base cases:
+    if (a == b)
+        return a;
+    if (a == 0)
+        return b;
+    if (b == 0)
+        return a;
 
-	// Now we start looking for factors of 2.
-	if (!(a & 1)) {   // a is even
-		if (b & 1)  // b is odd
-			return gcd(a >> 1, b);
-		else            // b is also even
-			return gcd(a >> 1, b >> 1) << 1;
-	}
+    // Now we start looking for factors of 2.
+    if (!(a & 1)) {   // a is even
+        if (b & 1)  // b is odd
+            return gcd(a >> 1, b);
+        else            // b is also even
+            return gcd(a >> 1, b >> 1) << 1;
+    }
 
-	if (!(b & 1))     // a is odd, b is even
-		return gcd(a, b >> 1);
+    if (!(b & 1))     // a is odd, b is even
+        return gcd(a, b >> 1);
 
-	if (a > b)
-		return gcd((a - b) >> 1, b);
-	else
-		return gcd((b - a) >> 1, a);
+    if (a > b)
+        return gcd((a - b) >> 1, b);
+    else
+        return gcd((b - a) >> 1, a);
 }
 
 /**
@@ -80,10 +80,10 @@ std::map<uint64_t, uint64_t> trial_div(uint64_t n) {
             if (i*i > n) break;
             
             while (n % i == 0) {
-				if (factors.find(i) != factors.end())
-					++factors[i];
-				else
-					factors.insert(std::map<uint64_t, uint64_t>::value_type(i, 1));
+                if (factors.find(i) != factors.end())
+                    ++factors[i];
+                else
+                    factors.insert(std::map<uint64_t, uint64_t>::value_type(i, 1));
                 n /= i;
             }
         }
@@ -92,12 +92,12 @@ std::map<uint64_t, uint64_t> trial_div(uint64_t n) {
     // At this point, either n == 1 or n is itself a prime factor of the original
     // value. If the latter is true, we need to add that value to the list of
     // vectors as well.
-	if (n > 1) {
-		if (factors.find(n) != factors.end())
-			++factors[n];
-		else
-			factors.insert(std::map<uint64_t, uint64_t>::value_type(n, 1));
-	}
+    if (n > 1) {
+        if (factors.find(n) != factors.end())
+            ++factors[n];
+        else
+            factors.insert(std::map<uint64_t, uint64_t>::value_type(n, 1));
+    }
     
     return factors;
 }
@@ -121,16 +121,16 @@ uint64_t pollard(uint64_t n, uint64_t c) {
     //     3. Let h = (h^2 + c) mod n. Repeat this operation once.
     //     4. Let d = gcd(abs(t - h), n).
     while (d == 1) {
-		t = (t*t + c) % n;
-		h = (h*h + c) % n;
-		h = (h*h + c) % n;
-		d = gcd((t > h ? t-h : h-t), n);
+        t = (t*t + c) % n;
+        h = (h*h + c) % n;
+        h = (h*h + c) % n;
+        d = gcd((t > h ? t-h : h-t), n);
     }
     
     // At this point, d is either a non-trivial factor of n, or it is n. If the
     // latter is true, we must perform the algorithm again.
     if (d == n)
         return pollard(n, c + 1);
-	else
-		return d;
+    else
+        return d;
 }

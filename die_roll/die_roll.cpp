@@ -30,7 +30,7 @@ int main(int argc, char** argv) {
         std::cout << "\tdice: Number of dice to roll (> 0)" << std::endl;
         std::cout << "\tsides: Sides per die (Supports any die side, including % for percentiles)" << std::endl;
         std::cout << "\tmod: Modifier to die roll (p=positive, m=negative)\n" << std::endl;
-		std::cout << "Generates (total) random numbers in the range [dice + mod, (dice)(sides) + mod]." << std::endl;
+        std::cout << "Generates (total) random numbers in the range [dice + mod, (dice)(sides) + mod]." << std::endl;
         return EXIT_FAILURE;
     }
     

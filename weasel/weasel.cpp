@@ -34,36 +34,36 @@ bool isupper(char);
 int main(int argc, char** argv) {
     if (argc != 4) {
         std::cout << "Usage: weasel [target] [copies] [mutate]" << std::endl;
-		std::cout << "\ttarget: Target string (UPPERCASE only)" << std::endl;
-		std::cout << "\tcopies: Total children per generation" << std::endl;
-		std::cout << "\tmutate: Chance to mutate (1 <= mutate <= 100)" << std::endl;
+        std::cout << "\ttarget: Target string (UPPERCASE only)" << std::endl;
+        std::cout << "\tcopies: Total children per generation" << std::endl;
+        std::cout << "\tmutate: Chance to mutate (1 <= mutate <= 100)" << std::endl;
         return EXIT_FAILURE;
     }
     
-	// Set up our variables, including the required globals
-	target = argv[1];
-	len = target.length();
+    // Set up our variables, including the required globals
+    target = argv[1];
+    len = target.length();
     int copies = std::atoi(argv[2]);
     int rate = std::atoi(argv[3]);
 
-	// Check to see if the target has only the available characters; if not, exit
-	for (int i = 0; i < len; ++i) {
-		if (isupper(target[i]) || target[i] == ' ')
-			continue;
-		else {
-			std::cout << "ERROR: Target string contains illegal character. Only the following chars are allowed:" << std::endl;
-			std::cout << "\t" << chars << std::endl;
-			return EXIT_FAILURE;
-		}
-	}
+    // Check to see if the target has only the available characters; if not, exit
+    for (int i = 0; i < len; ++i) {
+        if (isupper(target[i]) || target[i] == ' ')
+            continue;
+        else {
+            std::cout << "ERROR: Target string contains illegal character. Only the following chars are allowed:" << std::endl;
+            std::cout << "\t" << chars << std::endl;
+            return EXIT_FAILURE;
+        }
+    }
     
     std::string parent;
     for (int i = 0; i < len; ++i)
         parent += chars[get_char(mt)];
     int init_fit = fitness(parent);
     
-	for (int f = init_fit, gen = 1; f < len; f = fitness(parent), ++gen) {
-		std::cout << parent << ": " << f << " (Generation " << gen << ")" << std::endl;
+    for (int f = init_fit, gen = 1; f < len; f = fitness(parent), ++gen) {
+        std::cout << parent << ": " << f << " (Generation " << gen << ")" << std::endl;
         std::vector<std::string> children;
         children.reserve(copies + 1);
         children.push_back(parent);
@@ -110,5 +110,5 @@ bool less_fit(const std::string& s1, const std::string& s2) {
 
 // C-like boolean method to see if a character is uppercase only
 bool isupper(char c) {
-	return c >= 'A' && c <= 'Z';
+    return c >= 'A' && c <= 'Z';
 }

@@ -39,13 +39,13 @@ int wmain(int argc, wchar_t* argv[]) {
     _setmode(_fileno(stdout), _O_U16TEXT);
     
     // Prep the filename for usage
-	const wchar_t* arg = argv[1];
-	std::wstring filename(L".\\data\\words_");
-	filename += std::wstring(arg) + std::wstring(L".txt");
-	const wchar_t* f = filename.c_str();
+    const wchar_t* arg = argv[1];
+    std::wstring filename(L".\\data\\words_");
+    filename += std::wstring(arg) + std::wstring(L".txt");
+    const wchar_t* f = filename.c_str();
     
     // Read the file and obtain the word
-	std::vector<std::wstring> data = read_file(f);
+    std::vector<std::wstring> data = read_file(f);
     std::wstring line = get_line(data);
     
     clock_t end = std::clock();
@@ -61,7 +61,7 @@ int wmain(int argc, wchar_t* argv[]) {
 // Read the given file
 std::vector<std::wstring> read_file(const wchar_t* file) {
     // Open the file, also declare other necessary variables
-	std::vector<std::wstring> data;
+    std::vector<std::wstring> data;
     std::wifstream fin;
     std::wstring line;
     fin.open(file);
