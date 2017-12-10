@@ -1,11 +1,11 @@
 /*
  * int_to_eng.cpp: Number-to-English Utility. Given an integer in the range
- * [-2^63, 2^63), output the number in correct English notation.
+ * (-2^63, 2^63), output the number in correct English notation.
  *
- * Version:     1.0.0
- * License:     Public Domain
+ * Version:     1.1.0
+ * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
- * Last Edited: 10/28/2017, 8:00pm
+ * Last Edited: 12/09/2017, 10:13pm
  */
 
 #include <iostream>
@@ -76,12 +76,13 @@ std::string to_english(lli n) {
 
 int main(int argc, char** argv) {
     if (argc != 2) {
-        std::cout << "Usage: int_to_eng [num]\n";
-        std::cout << "\tnum: Number to convert to English, in the range (-(2^63), 2^63)\n";
+        std::cout << "Usage: int_to_eng num\n";
+        std::cout << "\tnum: Number to convert to English, in the range (-(2^63), 2^63)\n\n";
+        std::cout << "Displays the given number in (American) English.\n";
         return EXIT_FAILURE;
     }
     
-    char *e;
+    char* e;
     lli num = std::strtoll(argv[1], &e, 10);
     std::string num_str = to_english(num);
     

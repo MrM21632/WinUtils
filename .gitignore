@@ -15,7 +15,16 @@ x64/
 
 # We will ignore any and all Visual Studio files as well.
 .vs/
-*.sln
 *.VC.db
-*.vcxproj
-*.vcxproj.*
+*.suo
+*.user
+
+# Finally, we exclude executables and archives
+*.exe
+*.zip
+*.7z
+*.tar
+*.gz
+*.bzip2
+*.xz
+*.rar

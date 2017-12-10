@@ -2,8 +2,10 @@
  * num_gen.cpp: Number Generation Utility. Generates a list of integers within a
  *     given range (min to max).
  *
- * Written by Joshua Morrison, 9-15-2017
- * Last Edited: 9-15-2017, 8:30pm
+ * Version:     1.1.0
+ * License:     MIT License (see LICENSE.txt for more details)
+ * Author:      Joshua Morrison (MrM21632)
+ * Last Edited: 12/09/2017, 10:50pm
  */
 
 #include <iostream>
@@ -11,7 +13,6 @@
 #include <random>
 #include <cstdlib>
 
-/*** Function and Type Declarations ***/
 typedef long long int lli;
 std::random_device rd;
 std::mt19937 mt(rd());
@@ -19,10 +20,11 @@ std::mt19937 mt(rd());
 
 int main(int argc, char** argv) {
     if (argc != 4) {
-        std::cout << "Usage: num_gen [total] [min] [max]" << std::endl;
-        std::cout << "\ttotal: Total number of numbers to generate" << std::endl;
-        std::cout << "\tmin: Minimum bound for generation" << std::endl;
-        std::cout << "\tmax: Maximum bound for generation" << std::endl;
+        std::cout << "Usage: num_gen total min max\n";
+        std::cout << "\ttotal: Total number of numbers to generate\n";
+        std::cout << "\tmin: Minimum bound for generation\n";
+        std::cout << "\tmax: Maximum bound for generation\n\n";
+        std::cout << "Generate a list of (total) numbers from (min) to (max).\n";
         return EXIT_FAILURE;
     }
     
@@ -35,7 +37,7 @@ int main(int argc, char** argv) {
     
     // Generate numbers and write to our output file
     for (lli i = 0; i < total; ++i)
-        fout << dist(mt) << std::endl;
+        fout << dist(mt) << "\n";
     
     fout.close();
 }

@@ -2,10 +2,10 @@
  * prime_test.cpp: Math Utility #6. Determine if the given integer is prime, then
  * find and output the next prime starting from the same integer.
  *
- * Version:     1.0.0
- * License:     Public Domain
+ * Version:     1.2.0
+ * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
- * Last Edited: 11/8/2017, 9:30pm
+ * Last Edited: 12/09/2017, 10:45pm
  */
 
 #include <random>
@@ -46,16 +46,11 @@ uint64_t mod_add(uint64_t a, uint64_t b, uint64_t n) {
 uint64_t mod_mult(uint64_t a, uint64_t b, uint64_t n) {
     uint64_t r = 0;  // Our resulting calculation, to return
 
-    // If a is larger than the modulus, we need to truncate it in order to avoid
+    // If a is larger than the modulus, we need to reduce it in order to avoid
     // integer overflow.
     if (a >= n) a %= n;
 
-    // This loop performs the following operation:
-    //     1. If b <= 0, exit the loop.
-    //     2. if b is odd, let r = (r + a), then truncate r by performing
-    //        mod n on it.
-    //     3. Let a = 2*a, then truncate a by performing mod n on it.
-    //     4. Let b = b / 2.
+    // This loop performs modular addition on r until the multiplier is 0.
     while (b > 0) {
         if (b & 1)  // Equivalent to "b % 2 == 1"
             r = mod_add(r, a, n);
@@ -64,9 +59,9 @@ uint64_t mod_mult(uint64_t a, uint64_t b, uint64_t n) {
         b >>= 1;    // Equivalent to "b /= 2"
     }
 
-    // NOTE: (a * b) mod n == ((a mod n) * (b mod n)) mod n. At this point, we
-    // have calculated r = (a mod n) * (b mod n), so we now need to truncate r
-    // by n, then return that result.
+    // (a * b) mod n == ((a mod n) * (b mod n)) mod n. At this point, we have
+    // calculated r = (a mod n) * (b mod n), so we now need to reduce r by mod
+    // n, then return that result.
     return r % n;
 }
 
@@ -81,16 +76,12 @@ uint64_t mod_mult(uint64_t a, uint64_t b, uint64_t n) {
 uint64_t mod_pow(uint64_t a, uint64_t b, uint64_t n) {
     uint64_t r = 1;  // Our resulting calculation, to return
 
-    // If a is larger than the modulus, we need to truncate it in order to avoid
+    // If a is larger than the modulus, we need to reduce it in order to avoid
     // integer overflow.
     if (a >= n) a %= n;
 
-    // This loop performs the following operation:
-    //     1. If b <= 0, exit the loop.
-    //     2. If b is odd, let r = (r * a) mod n. In order to avoid overflow, we
-    //        use mod_mult().
-    //     3. Let b = b / 2.
-    //     4. Let a = a^2 mod n.
+    // This loop performs modular multiplication on both the result variable and
+    // on a, until our exponent is 0.
     while (b > 0) {
         if (b & 1)  // Equivalent to "b % 2 == 1"
             r = mod_mult(r, a, n);
@@ -122,11 +113,7 @@ bool miller_rabin(uint64_t n, uint64_t d) {
     if (x == 1 || x == n - 1)
         return true;
 
-    // This loop performs the following operation:
-    //     1. If d == n-1, exit the loop.
-    //     2. Let x = x^2 mod n.
-    //     3. Let d = 2 * d.
-    //     4. If x == 1, return true. If x == n-1, return true.
+    // This loop performs modular multiplication on x until d is equal to n-1.
     while (d != (n - 1)) {
         x = mod_mult(x, x, n);
         d <<= 1;  // Equivalent to "d *= 2"
@@ -183,9 +170,10 @@ bool is_prime(uint64_t n, uint64_t k) {
 * Output: The next prime number following n. Note that n itself can be prime.
 */
 uint64_t next_prime(uint64_t n) {
-    // This loop performs the following operations for i in [n + 1, inf):
-    //     1. If is_prime(i), return i.
-    //     2. Increment i.
+    // This loop runs for all i in [n+1, inf).
+    // 
+    // Because there is consistently a marginal number of integers between any
+    // two primes, this process will execute quickly.
     for (uint64_t i = n + 1; ; ++i) {
         if (is_prime(i, TEST_NUM))
             return i;
@@ -193,15 +181,15 @@ uint64_t next_prime(uint64_t n) {
 }
 
 
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
     if (argc != 2) {
-        std::printf("Usage: prime_test [n]\n");
+        std::printf("Usage: prime_test n\n");
         std::printf("\tn: Number to test; in range [0, 2^64)\n\n");
         std::printf("Test the given number for primality, then find the next prime number.\n");
         std::exit(EXIT_FAILURE);
     }
 
-    char *e;
+    char* e;
     uint64_t n = std::strtoull(argv[1], &e, 10);
 
     clock_t start = std::clock();

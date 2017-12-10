@@ -1,17 +1,16 @@
 /*
- * die_roll.cpp: Die Rolling utility. Generates a random number through the
- * following format: NdS(+/-)M, where
- *     - N is the number of dice being rolled
- *     - S is the number of sides per die. The following numbers are allowed:
- *       2, 3, 4, 5, 6, 7, 8, 10, 12, 20, 24, 30, % (100)
- *     - M is the modifier being applied (positive if + is added, negative if -
- *       is added).
+ * die_roll.cpp: Die Rolling utility. Generates a random number of the following
+ * format: NdS(+/-)M.
+ *     - N is the number of dice being rolled.
+ *     - S is the number of sides per die. Any number is allowed, including % as
+ *       a stand-in for 100.
+ *     - M is the modifier being applied (positive or negative).
  * This program also allows for more than one roll, if desired.
  *
- * Version:     1.1.0
- * License:     Public Domain
+ * Version:     1.2.0
+ * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
- * Last Edited: 11/4/2017, 5:00pm
+ * Last Edited: 12/09/2017, 10:10pm
  */
 
 #include <iostream>
@@ -24,13 +23,13 @@ std::mt19937 mt(rd());
 
 
 int main(int argc, char** argv) {
-    if (argc != 6) {
-        std::cout << "Usage: die_roll [total] [dice] [sides] [mod] [p/m]" << std::endl;
-        std::cout << "\ttotal: Total rolls to make (> 0)" << std::endl;
-        std::cout << "\tdice: Number of dice to roll (> 0)" << std::endl;
-        std::cout << "\tsides: Sides per die (Supports any die side, including % for percentiles)" << std::endl;
-        std::cout << "\tmod: Modifier to die roll (p=positive, m=negative)\n" << std::endl;
-        std::cout << "Generates (total) random numbers in the range [dice + mod, (dice)(sides) + mod]." << std::endl;
+    if (argc != 5) {
+        std::cout << "Usage: die_roll total dice sides mod\n";
+        std::cout << "\ttotal: Total rolls to make (> 0)\n";
+        std::cout << "\tdice: Number of dice to roll (> 0)\n";
+        std::cout << "\tsides: Sides per die (Supports any die side, including % for percentiles)\n";
+        std::cout << "\tmod: Modifier to die roll (positive or negative)\n\n";
+        std::cout << "Generates (total) random numbers in the range [dice + mod, (dice)(sides) + mod].\n";
         return EXIT_FAILURE;
     }
     
@@ -39,11 +38,9 @@ int main(int argc, char** argv) {
     int dice = std::atoi(argv[2]);
     
     int mod = std::atoi(argv[4]);
-    if (argv[5][0] == 'm')
-        mod *= (-1);
     
     int min = dice + mod;
-    if (min < 0)
+    if (min <= 0)
         min = 1;  // Minimum result of 1
     
     int sides;
@@ -59,5 +56,5 @@ int main(int argc, char** argv) {
     // Roll the dice
     std::uniform_int_distribution<int> dist(min, max);
     for (int i = 1; i <= total; ++i)
-        std::cout << "Die Roll #" << i << ": " << dist(mt) << std::endl;
+        std::cout << "Die Roll #" << i << ": " << dist(mt) << "\n";
 }

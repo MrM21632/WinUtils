@@ -1,0 +1,13 @@
+Setting up the util_bin directory is very simple:
+    1. Copy the folder to a place of your choice (Ex: in C:\)
+    2. Add the following to your user PATH (or the system PATH, if desired):
+           <ROOT PATH>\util_bin
+           <ROOT PATH>\util_bin\bzip2-1.0.5-bin\bin
+           <ROOT PATH>\util_bin\Coreinfo
+           <ROOT PATH>\util_bin\cpu-z_1.80-en
+           <ROOT PATH>\util_bin\hwmonitor_1.32
+           <ROOT PATH>\util_bin\vim\vim80
+       where <ROOT PATH> designates where you copied the folder.
+
+Once this is done, you can use all included executables via the Command Prompt or
+PowerShell.

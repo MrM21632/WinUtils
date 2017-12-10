@@ -1,44 +1,48 @@
 /*
- * const.c: Utility that prints a specified mathematical constant up to one
- *     billion points of precision. Currently, the following constants are
- *     supported:
+ * const.c: Numerical Constant Utility. Prints a specified mathematical/physical
+ * constant to a given precision. Currently, the following constants are
+ * supported:
  *     - Apery's Constant, or Zeta(3) (apery)
  *     - Archimedes' Constant (pi)
- *     - Euler's Number (e)
+ *     - Euler's/Napier's Number (e)
  *     - The Euler-Mascheroni Constant (masch)
  *     - The Golden Ratio (ratio)
+ *     - Square Root of 2 (root2)
+ *     - Square Root of 3 (root3)
  *
- * Written by Joshua Morrison, 9-15-2017
- * Last Edited: 9-15-2017, 8:00pm
+ * Version:     1.1.0
+ * License:     MIT License (see LICENSE.txt for more details)
+ * Author:      Joshua Morrison (MrM21632)
+ * Last Edited: 12/09/2017, 8:30pm
  */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-/*** Type Declarations ***/
-typedef unsigned long long int ulli;
-
 
 int main(int argc, char** argv) {
     if (argc != 3) {
-        printf("Usage: const [const] [prec]\n");
-        printf("\tconst: The desired constant. The following are supported\n");
-        printf("\t\tapery: Apery's Constant, or Zeta(3)\n");
+        printf("Usage: const num prec\n");
+        printf("\tnum: The desired constant. Choose one of the following:\n");
+        printf("\t\tapery: Apery's Constant, also known as Zeta(3)\n");
         printf("\t\te: Euler's Number\n");
         printf("\t\tmasch: Euler-Mascheroni Constant\n");
         printf("\t\tpi: Archimedes' Constant\n");
         printf("\t\tratio: The Golden Ratio\n");
-        printf("\tprec: The desired point of precision\n");
+        printf("\t\troot2: Square Root of 2\n");
+        printf("\t\troot3: Square Root of 3\n");
+        printf("\tprec: The desired point of precision (Max 1 billion)\n\n");
+        printf("Print a numeric constant to the specified precision.\n");
         return EXIT_FAILURE;
     }
     
     const char* c = (const char*) argv[1];
     const char* d = ".\\data\\";
     const char* s = "_digits.txt";
-    ulli p = (ulli) atoi(argv[2]);
+    int p = atoi(argv[2]);
     
-    // Make the filename, then open the file
+    // Construct the filename, then open the file (read-only)
     char file[26];
     strcpy(file, d);
     strcat(file, c);

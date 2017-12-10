@@ -1,10 +1,11 @@
 /*
- * tip.c: Calculates total cost with tip, given a cost and tip rate.
+ * tip.c: Tip Utility. Calculates total cost with tip, given a cost and tip
+ * rate.
  *
- * Version:     1.0.0
- * License:     Public Domain
+ * Version:     1.1.0
+ * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
- * Last Edited: 11/4/2017, 10:00pm
+ * Last Edited: 12/09/2017, 9:45pm
  */
 
 #include <stdio.h>
@@ -13,9 +14,9 @@
 
 int main(int argc, char** argv) {
     if (argc != 3) {
-        printf("Usage: tip [cost] [rate]\n");
-        printf("\tcost: Initial cost before accounting for tips.\n");
-        printf("\trate: User-selected tip rate.\n\n");
+        printf("Usage: tip cost rate\n");
+        printf("\tcost: Initial cost before accounting for tips. (Format: ##.##)\n");
+        printf("\trate: User-selected tip rate. (Format: ##.##)\n\n");
         printf("Calculates total cost with tip, given an initial cost and desired tip rate.\n");
         return EXIT_FAILURE;
     }

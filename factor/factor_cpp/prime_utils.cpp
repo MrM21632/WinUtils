@@ -130,6 +130,7 @@ uint64_t mod_pow(uint64_t a, uint64_t b, uint64_t n) {
  * Output: true if n is (likely) prime, or false if n is composite.
  */
 bool miller_rabin(uint64_t n, uint64_t d) {
+
     // Variables for random number generation
     std::random_device rd;
     std::mt19937 mt(rd());

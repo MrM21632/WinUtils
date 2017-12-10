@@ -19,7 +19,10 @@
 
 
 /**
- * derange(): Compute the derangement of n, !n.
+ * derange(): Compute the derangement of n, !n. This method uses the following
+ * formula for calculating the derangement:
+ * 
+ *     !n = floor((n! / e) + 0.5).
  *
  * Input:  mpz_t res - arbitrary-precision integer to store the calculation.
  *         mpir_ui n - the number to compute the derangement of.
@@ -55,9 +58,9 @@ void derange(mpz_t res, mpir_ui n) {
 }
 
 
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
     if (argc != 2) {
-        std::printf("Usage: fact [n]\n");
+        std::printf("Usage: fact n\n");
         std::printf("\tn: The number to perform the calculations for.\n\n");
         std::printf("Compute various values for a given number, n:\n");
         std::printf("\t- Regular factorial, n!\n");
@@ -68,7 +71,7 @@ int main(int argc, char **argv) {
     }
 
     // Get the value n from argv
-    char *e;
+    char* e;
     mpir_ui n = static_cast<mpir_ui>(std::strtoull(argv[1], &e, 10));
 
     // Setup the arbitrary-precision integers.
@@ -89,10 +92,10 @@ int main(int argc, char **argv) {
     double time = static_cast<double>(end - start) / CLOCKS_PER_SEC;
 
     // Convert the calculations to strings, for ease of output.
-    char *fact_str = mpz_get_str(NULL, 10, fact_n);
-    char *doub_str = mpz_get_str(NULL, 10, doub_n);
-    char *prim_str = mpz_get_str(NULL, 10, prim_n);
-    char *derg_str = mpz_get_str(NULL, 10, derg_n);
+    char* fact_str = mpz_get_str(NULL, 10, fact_n);
+    char* doub_str = mpz_get_str(NULL, 10, doub_n);
+    char* prim_str = mpz_get_str(NULL, 10, prim_n);
+    char* derg_str = mpz_get_str(NULL, 10, derg_n);
 
     // Output the results.
     std::printf("Process completed; took %.6f seconds.\n\n", time);

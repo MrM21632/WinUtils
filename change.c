@@ -1,59 +1,58 @@
 /*
- * change.c: Change-making program, given a cost and amount of money received.
+ * change.c: Change Making Utility. Given a total cost and an amount of money
+ * received, calculate and output the total change owed, broken down into the
+ * most common American currency values.
  *
- * Written by Joshua Morrison, 7-10-2017
- * Last Edited: 7-10-2017, 9:30pm
+ * Version:     1.1.0
+ * License:     MIT License (see LICENSE.txt for more details)
+ * Author:      Joshua Morrison (MrM21632)
+ * Last Edited: 12/09/2017, 8:27pm
  */
 
+#include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 
 int main(int argc, char** argv) {
     if (argc != 3) {
-        printf("Usage: change [cost] [given]\n");
-        printf("NOTE: Must enter values as integers (Ex: $10.00 as 1000)\n");
+        printf("Usage: change cost given\n");
+        printf("\tcost: Total cost. (Format: ##.##)\n");
+        printf("\tgiven: Amount received. (Format: ##.##)\n\n");
+        printf("Calculates change owed given a total cost and amount of money received.\n");
+        printf("NOTE: Supports American currency only.\n");
         return EXIT_FAILURE;
     }
     
-    // Due to issues with type casting, this program opts to take in the
-    // variables as integers, and to operate on them as integers only.
-    int cost = atoi(argv[1]);
-    int given = atoi(argv[2]);
-    int left = cost - given;
+    double cost = atof(argv[1]);
+    double given = atof(argv[2]);
+    double diff = cost - given;
     
-    // Make a floating-point version of the amount left over, for outputting
-    // purposes.
-    int change = abs(left);
-    double c = ((double) abs(left)) / 100.0;
-    
-    // Base cases:
-    //     1. If there is not enough change, print a message alerting the user
-    //        of this and exit.
-    //     2. If there is exactly enough change, print a message alerting the
-    //        user of this and exit.
-    if (left > 0) {
-        printf("You still owe $%.2f\n", c);
+    if (diff > 0) {
+        printf("You still owe $%.2f.\n", diff);
         return EXIT_SUCCESS;
     }
-    if (left == 0) {
-        printf("No change required.\n");
+    if (diff == 0) {
+        printf("Exact amount given; no change required.\n");
         return EXIT_SUCCESS;
     }
     
-    // Dollar bills, quarters, dimes, nickels, pennies
-    int b, q, d, n, p;
-    b = change / 100;  // Get the total number of dollar bills
-    q = (change % 100) / 25;  // Get the total number of quarters
-    d = ((change % 100) % 25) / 10;  // Get the total number of dimes
-    n = (((change % 100) % 25) % 10) / 5;  // Get the total number of nickels
-    p = (((change % 100) % 25) % 10) % 5;  // Get the total number of pennies
+    // The conversion algorithm below is designed to avoid any issues with type
+    // conversions. Any variation will cause the program to not function
+    // properly.
+    diff = fabs(diff);
+    int diff_as_int = (int) floor((diff * 100.0) + 0.5);
     
-    // Print the change by group
-    printf("Return $%.2f, given as:\n", c);
-    printf("\t%d dollars,\n", b);
-    printf("\t%d quarters,\n", q);
-    printf("\t%d dimes,\n", d);
-    printf("\t%d nickels, and\n", n);
-    printf("\t%d pennies.\n", p);
+    int b = diff_as_int / 100;                      // Dollar Bills
+    int q = (diff_as_int % 100) / 25;               // Quarters
+    int d = ((diff_as_int % 100) % 25) / 10;        // Dimes
+    int n = (((diff_as_int % 100) % 25) % 10) / 5;  // Nickels
+    int p = (((diff_as_int % 100) % 25) % 10) % 5;  // Pennies
+    
+    printf("$%.2f extra given. Return the following:\n", diff);
+    printf("\t%d dollar bill(s),\n", b);
+    printf("\t%d quarter(s),\n", q);
+    printf("\t%d dime(s),\n", d);
+    printf("\t%d nickel(s), and\n", n);
+    printf("\t%d penny(ies).\n", p);
 }
