@@ -2,10 +2,10 @@
  * prime_test.cpp: Math Utility #6. Determine if the given integer is prime, then
  * find and output the next prime starting from the same integer.
  *
- * Version:     1.2.0
+ * Version:     1.1.0
  * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
- * Last Edited: 12/09/2017, 10:45pm
+ * Last Edited: 12/10/2017, 9:33am
  */
 
 #include <random>
@@ -44,7 +44,7 @@ uint64_t mod_add(uint64_t a, uint64_t b, uint64_t n) {
 * Output: (a * b) mod n.
 */
 uint64_t mod_mult(uint64_t a, uint64_t b, uint64_t n) {
-    uint64_t r = 0;  // Our resulting calculation, to return
+    uint64_t r = 0;  // Remainder, to be returned
 
     // If a is larger than the modulus, we need to reduce it in order to avoid
     // integer overflow.
@@ -74,14 +74,14 @@ uint64_t mod_mult(uint64_t a, uint64_t b, uint64_t n) {
 * Output: a^b mod n.
 */
 uint64_t mod_pow(uint64_t a, uint64_t b, uint64_t n) {
-    uint64_t r = 1;  // Our resulting calculation, to return
+    uint64_t r = 1;  // Remainder, to be returned
 
     // If a is larger than the modulus, we need to reduce it in order to avoid
     // integer overflow.
     if (a >= n) a %= n;
 
-    // This loop performs modular multiplication on both the result variable and
-    // on a, until our exponent is 0.
+    // This loop performs modular multiplication on both the remainder and the
+    // base, until our exponent is 0.
     while (b > 0) {
         if (b & 1)  // Equivalent to "b % 2 == 1"
             r = mod_mult(r, a, n);
@@ -136,11 +136,9 @@ bool miller_rabin(uint64_t n, uint64_t d) {
 * Output: true if every test succeeds, false otherwise.
 */
 bool is_prime(uint64_t n, uint64_t k) {
-    // Base Case: If n <= 1, we already know n is not prime.
+    // Base cases
     if (n <= 1) return false;
-    // Base Case: If n <= 3, we know n is prime.
     if (n <= 3) return true;
-    // Base Case: If n is even, we know n is not prime.
     if (!(n & 1)) return false;  // Equivalent to "n % 2 == 0"
 
     // At this point, we know n is odd and greater than 1. Now, our goal is to
