@@ -184,7 +184,7 @@ bool is_prime(uint64_t n, uint64_t k) {
  * denotes a prime number and false denotes a composite number. This algorithm
  * is, in essence, an improvement of the Sieve of Eratosthenes.
  *
- * Input:  uint32_t n - the upper bound for sieving.
+ * Input:  uint64_t n - the upper bound for sieving.
  * Output: An array as described above.
  */
 bool* sieve_atkin(uint64_t n) {
