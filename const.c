@@ -13,7 +13,7 @@
  * Version:     1.1.0
  * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
- * Last Edited: 12/09/2017, 8:30pm
+ * Last Edited: 12/16/2017, 9:25am
  */
 
 #include <stdio.h>
@@ -38,7 +38,7 @@ int main(int argc, char** argv) {
     }
     
     const char* c = (const char*) argv[1];
-    const char* d = ".\\data\\";
+    const char* d = ".\\data\\const\\";
     const char* s = "_digits.txt";
     int p = atoi(argv[2]);
     
