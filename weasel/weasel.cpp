@@ -2,9 +2,9 @@
  * weasel.cpp: Weasel Algorithm. Simulates Dawkins' "Weasel Algorithm." Given a
  * target string, a number of copies to make each "generation," and a chance for
  * a character to "mutate," iterate through as many "generations" as required
- * until a copy of the target string is found. This version of the algorithm
- * allows the user to select the target, the number of copies per generation,
- * and the chance for each character to mutate.
+ * until a copy of the target string is found.
+ * This version of the algorithm allows the user to select the target, the number
+ * of copies per generation, and the chance for each character to mutate.
  *
  * Version:     1.0.0-rc1
  * License:     MIT License (see LICENSE.txt for more details)
