@@ -9,10 +9,10 @@
  *     - Sieve of Atkin
  *     - Integer square root, which is used by the Sieve
  *
- * Version:     1.3.0
+ * Version:     1.0.0-rc1
  * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
- * Last Edited: 12/10/2017, 10:05am
+ * Last Edited: 1/17/2018, 5:00pm
  */
 
 #include <cstdlib>
@@ -42,6 +42,7 @@ uint64_t isqrt(uint64_t n) {
         return l;
 }
 
+
 /**
  * mod_add(): Modular Addition, as defined for Unsigned 64-bit Integers.
  *
@@ -52,6 +53,7 @@ uint64_t isqrt(uint64_t n) {
 uint64_t mod_add(uint64_t a, uint64_t b, uint64_t n) {
     return ((a % n) + (b % n)) % n;
 }
+
 
 /**
  * mod_mult(): Modular Multiplication, as defined for Unsigned 64-bit Integers.
@@ -82,6 +84,7 @@ uint64_t mod_mult(uint64_t a, uint64_t b, uint64_t n) {
     return r % n;
 }
 
+
 /**
  * mod_pow(): Modular Exponentiation, as defined for Unsigned 64-bit Integers.
  *
@@ -108,6 +111,7 @@ uint64_t mod_pow(uint64_t a, uint64_t b, uint64_t n) {
     
     return r;
 }
+
 
 /**
  * miller_rabin(): Main algorithm for the Miller-Rabin primality test. Returns a
@@ -145,6 +149,7 @@ bool miller_rabin(uint64_t n, uint64_t d) {
     return false;
 }
 
+
 /**
  * is_prime(): Function that calls miller_rabin() a number of times, as a means
  * of improving the accuracy of the test.
@@ -179,6 +184,7 @@ bool is_prime(uint64_t n, uint64_t k) {
     return true;
 }
 
+
 /**
  * sieve_atkin(): Sieve of Atkin. Returns a list of boolean values, where true
  * denotes a prime number and false denotes a composite number. This algorithm
@@ -187,9 +193,9 @@ bool is_prime(uint64_t n, uint64_t k) {
  * Input:  uint64_t n - the upper bound for sieving.
  * Output: An array as described above.
  */
-bool* sieve_atkin(uint64_t n) {
+bool *sieve_atkin(uint64_t n) {
     // The new[] operator in C++ makes setup very easy for us.
-    bool* data = new bool[n + 1]();
+    bool *data = new bool[n + 1]();
     data[2] = true;
     data[3] = true;
 	uint64_t lim = isqrt(n);

@@ -2,17 +2,16 @@
  * int_to_eng.cpp: Number-to-English Utility. Given an integer in the range
  * (-2^63, 2^63), output the number in correct English notation.
  *
- * Version:     1.1.0
+ * Version:     1.0.0-rc1
  * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
- * Last Edited: 12/09/2017, 10:13pm
+ * Last Edited: 1/17/2018, 5:00pm
  */
 
 #include <iostream>
 #include <string>
+#include <cstdint>
 #include <cstdlib>
-
-typedef long long int lli;
 
 /* Arrays containing constant string values for numbers */
 std::string tens[10] = { "", "", "twenty ", "thirty ", "forty ", "fifty ", "sixty ", "seventy ", "eighty ", "ninety " };
@@ -23,28 +22,28 @@ std::string ones[10] = { "zero", "one ", "two ", "three ", "four ", "five ", "si
 /**
  * abs(): Calculate the absolute value of n.
  *
- * Input:  lli n - the number to perform the operation on.
+ * Input:  int64_t n - the number to perform the operation on.
  * Output: |n|.
  */
-lli ll_abs(lli n) {
-    lli mask = n >> ((sizeof(lli) * CHAR_BIT) - 1);
+int64_t int64_abs(int64_t n) {
+    int64_t mask = n >> ((sizeof(int64_t) * CHAR_BIT) - 1);
     return (n + mask) ^ mask;
 }
 
 /**
  * to_english(): Converts the given number to its proper English equivalent.
  *
- * Input:  lli n - the number in question.
+ * Input:  int64_t n - the number in question.
  * Output: The English equivalent of n.
  */
-std::string to_english(lli n) {
+std::string to_english(int64_t n) {
     // Setup the string to be returned. If the number is negative, set the string
     // up to accomomodate that, and let n = |n|.
     std::string n_str = "";
     
     if (n < 0) {
         n_str += "negative ";
-        n = ll_abs(n);
+        n = int64_abs(n);
     }
     
     // Recursively generate the string through use of division and modulus, then
@@ -74,7 +73,7 @@ std::string to_english(lli n) {
 }
 
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
     if (argc != 2) {
         std::cout << "Usage: int_to_eng num\n";
         std::cout << "\tnum: Number to convert to English, in the range (-(2^63), 2^63)\n\n";
@@ -82,8 +81,8 @@ int main(int argc, char** argv) {
         return EXIT_FAILURE;
     }
     
-    char* e;
-    lli num = std::strtoll(argv[1], &e, 10);
+    char *e;
+    int64_t num = std::strtoll(argv[1], &e, 10);
     std::string num_str = to_english(num);
     
     std::cout << num << ": " << num_str << "\n";

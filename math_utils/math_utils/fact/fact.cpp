@@ -5,10 +5,10 @@
  *     3. The primorial, n#
  *     4. The derangement or subfactorial, !n
  *
- * Version:     1.0.0
+ * Version:     1.0.0-rc1
  * License:     Public Domain
  * Author:      Joshua Morrison (MrM21632)
- * Last Edited: 11/5/2017, 10:30pm
+ * Last Edited: 1/17/2018, 5:00pm
  */
 
 #include <cmath>
@@ -58,7 +58,7 @@ void derange(mpz_t res, mpir_ui n) {
 }
 
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
     if (argc != 2) {
         std::printf("Usage: fact n\n");
         std::printf("\tn: The number to perform the calculations for.\n\n");
@@ -71,7 +71,7 @@ int main(int argc, char** argv) {
     }
 
     // Get the value n from argv
-    char* e;
+    char *e;
     mpir_ui n = static_cast<mpir_ui>(std::strtoull(argv[1], &e, 10));
 
     // Setup the arbitrary-precision integers.
@@ -92,10 +92,10 @@ int main(int argc, char** argv) {
     double time = static_cast<double>(end - start) / CLOCKS_PER_SEC;
 
     // Convert the calculations to strings, for ease of output.
-    char* fact_str = mpz_get_str(NULL, 10, fact_n);
-    char* doub_str = mpz_get_str(NULL, 10, doub_n);
-    char* prim_str = mpz_get_str(NULL, 10, prim_n);
-    char* derg_str = mpz_get_str(NULL, 10, derg_n);
+    char *fact_str = mpz_get_str(NULL, 10, fact_n);
+    char *doub_str = mpz_get_str(NULL, 10, doub_n);
+    char *prim_str = mpz_get_str(NULL, 10, prim_n);
+    char *derg_str = mpz_get_str(NULL, 10, derg_n);
 
     // Output the results.
     std::printf("Process completed; took %.6f seconds.\n\n", time);

@@ -2,10 +2,10 @@
  * num_gen.cpp: Number Generation Utility. Generates a list of integers within a
  *     given range (min to max).
  *
- * Version:     1.1.0
+ * Version:     1.0.0-rc1
  * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
- * Last Edited: 12/09/2017, 10:50pm
+ * Last Edited: 1/17/2018, 5:00pm
  */
 
 #include <iostream>
@@ -18,7 +18,7 @@ std::random_device rd;
 std::mt19937 mt(rd());
 
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
     if (argc != 4) {
         std::cout << "Usage: num_gen total min max\n";
         std::cout << "\ttotal: Total number of numbers to generate\n";

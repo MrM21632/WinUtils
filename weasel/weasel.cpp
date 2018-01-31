@@ -2,12 +2,14 @@
  * weasel.cpp: Weasel Algorithm. Simulates Dawkins' "Weasel Algorithm." Given a
  * target string, a number of copies to make each "generation," and a chance for
  * a character to "mutate," iterate through as many "generations" as required
- * until a copy of the target string is found.
+ * until a copy of the target string is found. This version of the algorithm
+ * allows the user to select the target, the number of copies per generation,
+ * and the chance for each character to mutate.
  *
- * Version:     1.1.0
+ * Version:     1.0.0-rc1
  * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
- * Last Edited: 12/09/2017, 11:25pm
+ * Last Edited: 1/17/2018, 5:00pm
  */
 
 #include <iostream>
@@ -38,7 +40,7 @@ std::uniform_int_distribution<int> get_char(0, chars_len - 1);
  * Input:  const std::string& s - the string to test.
  * Output: The fitness score of s.
  */
-int fitness(const std::string& s) {
+int fitness(const std::string &s) {
     int score = 0;
     
     for (int i = 0; i < len; ++i) {
@@ -74,7 +76,7 @@ std::string mutate(std::string s, int m) {
  * Input:  std::string &s1, &s2 - the strings to compare.
  * Output: true if s1 is less fit, false otherwise.
  */
-bool less_fit(const std::string& s1, const std::string& s2) {
+bool less_fit(const std::string &s1, const std::string &s2) {
     return fitness(s1) < fitness(s2);
 }
 
@@ -89,7 +91,7 @@ bool isupper(char c) {
 }
 
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
     if (argc != 4) {
         std::cout << "Usage: weasel target copies mutate\n";
         std::cout << "\ttarget: Target string (UPPERCASE only)\n";

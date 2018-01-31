@@ -1,10 +1,10 @@
 /*
  * factor.cpp: Main method and algorithm for Factorization utility.
  *
- * Version:     1.3.0
+ * Version:     1.0.0-rc1
  * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
- * Last Edited: 12/10/2017, 9:17am
+ * Last Edited: 1/17/2018, 5:00pm
  */
 
 #include <cstdio>
@@ -101,7 +101,7 @@ std::map<uint64_t, uint64_t> factor(uint64_t n) {
 }
 
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
     if (argc != 2) {
         std::printf("Usage: factor n\n");
         std::printf("\tn: Must be no larger than 2^64 - 1\n\n");
@@ -109,7 +109,7 @@ int main(int argc, char** argv) {
         std::exit(EXIT_FAILURE);
     }
     
-    char* e;
+    char *e;
     uint64_t n = std::strtoull(argv[1], &e, 10);
     
     clock_t start = std::clock();

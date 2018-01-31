@@ -2,10 +2,10 @@
  * primes.c: Prime Generation Utility. Generates a list of primes up to a given
  * bound.
  *
- * Version:     1.1.0
+ * Version:     1.0.0-rc1
  * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
- * Last Edited: 12/09/2017, 9:34pm
+ * Last Edited: 1/17/2018, 7:00pm
  */
 
 #include <stdbool.h>
@@ -46,9 +46,9 @@ uint32_t isqrt(uint32_t n) {
  * Input:  uint32_t n - the upper bound for sieving.
  * Output: An array as described above.
  */
-bool* sieve(uint32_t n) {
+bool *sieve(uint32_t n) {
     // calloc() initializes each cell to 0, which makes our setup much easier.
-    bool* data = calloc(n + 1, sizeof(bool));
+    bool *data = calloc(n + 1, sizeof(bool));
     data[2] = true;
     data[3] = true;
     uint32_t lim = isqrt(n);
@@ -94,7 +94,7 @@ bool* sieve(uint32_t n) {
 }
 
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
     if (argc != 2) {
         printf("Usage: primes n\n");
         printf("\tn: Bound for the sieve (Max 2^32 - 1)\n\n");
@@ -105,13 +105,13 @@ int main(int argc, char** argv) {
     // NOTE: we limit n to a 32-bit integer because of the limitations of arrays
     // in C/C++. At most, an array can hold SIZE_MAX elements, which is equal to
     // the upper limit of uint32_t.
-    char* cend;
+    char *cend;
     uint32_t n = (uint32_t) strtoul(argv[1], &cend, 10);
-    FILE* primes_file = fopen("primes.txt", "w");
+    FILE *primes_file = fopen("primes.txt", "w");
     uint32_t count = 0;
     
     clock_t start = clock();
-    bool* is_prime = sieve(n);
+    bool *is_prime = sieve(n);
     
     uint32_t k;
     for (k = 0; k <= n; ++k) {

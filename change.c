@@ -3,10 +3,10 @@
  * received, calculate and output the total change owed, broken down into the
  * most common American currency values.
  *
- * Version:     1.1.0
+ * Version:     1.0.0-rc1
  * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
- * Last Edited: 12/09/2017, 8:27pm
+ * Last Edited: 1/17/2018, 7:00pm
  */
 
 #include <math.h>
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
     if (argc != 3) {
         printf("Usage: change cost given\n");
         printf("\tcost: Total cost. (Format: ##.##)\n");
@@ -40,14 +40,23 @@ int main(int argc, char** argv) {
     // The conversion algorithm below is designed to avoid any issues with type
     // conversions. Any variation will cause the program to not function
     // properly.
+    // 
+    // At this point, diff is negative, so we need to make it positive first.
+    // Next, we convert diff to the total number of cents (whole number).
+    //     1. We multiply diff by 100, making it equivalent to the number of
+    //        pennies left over.
+    //     2. We add 0.5 to account for the truncation that occurs when computing
+    //        floor(). Not doing this can cause the program to lose information,
+    //        which will make the remaining calculations incorrect.
+    //     3. Take the floor of the calculation, then convert it to an integer.
     diff = fabs(diff);
-    int diff_as_int = (int) floor((diff * 100.0) + 0.5);
+    int cents = (int) floor((diff * 100.0) + 0.5);
     
-    int b = diff_as_int / 100;                      // Dollar Bills
-    int q = (diff_as_int % 100) / 25;               // Quarters
-    int d = ((diff_as_int % 100) % 25) / 10;        // Dimes
-    int n = (((diff_as_int % 100) % 25) % 10) / 5;  // Nickels
-    int p = (((diff_as_int % 100) % 25) % 10) % 5;  // Pennies
+    int b = cents / 100;                      // Dollar Bills
+    int q = (cents % 100) / 25;               // Quarters
+    int d = ((cents % 100) % 25) / 10;        // Dimes
+    int n = (((cents % 100) % 25) % 10) / 5;  // Nickels
+    int p = (((cents % 100) % 25) % 10) % 5;  // Pennies
     
     printf("$%.2f extra given. Return the following:\n", diff);
     printf("\t%d dollar bill(s),\n", b);

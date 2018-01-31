@@ -1,11 +1,14 @@
 /*
  * word.cpp: Word Utility. Randomly prints out a word from a list of words from
  * a specified language.
+ * This program has been heavily specialized to work in Windows' Command Prompt.
+ * If you plan to use this on a different platform, you will need to make some
+ * changes to this code for it to work correctly.
  *
- * Version:     1.2.0
+ * Version:     1.0.0-rc1
  * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
- * Last Edited: 12/16/2017, 9:48am
+ * Last Edited: 1/17/2018, 5:00pm
  */
 
 #include <iostream>
@@ -26,10 +29,10 @@
 /**
  * read_file(): Reads the contents of a file. Supports Unicode text.
  *
- * Input:  const wchar_t* file - the name of the file to read in.
+ * Input:  const wchar_t *file - the name of the file to read in.
  * Output: A vector of the file's lines.
  */
-std::vector<std::wstring> read_file(const wchar_t* file) {
+std::vector<std::wstring> read_file(const wchar_t *file) {
     std::vector<std::wstring> data;
     std::wifstream fin;
     std::wstring line;
@@ -38,6 +41,7 @@ std::vector<std::wstring> read_file(const wchar_t* file) {
     fin.imbue(std::locale(fin.getloc(), new std::codecvt_utf8<wchar_t, 0x10ffff, std::consume_header>));
     while (std::getline(fin, line))
         data.push_back(line);
+    fin.close();
 
     return data;
 }
@@ -45,10 +49,10 @@ std::vector<std::wstring> read_file(const wchar_t* file) {
 /**
  * get_line(): Randomly selects a string from a vector of strings.
  *
- * Input:  const std::vector<std::wstring>& data - Reference to the vector.
+ * Input:  const std::vector<std::wstring> &data - Reference to the vector.
  * Output: A randomly selected string from the vector.
  */
-std::wstring get_line(const std::vector<std::wstring>& data) {
+std::wstring get_line(const std::vector<std::wstring> &data) {
     int size = data.size();
 
     std::random_device rd;
@@ -59,7 +63,7 @@ std::wstring get_line(const std::vector<std::wstring>& data) {
 }
 
 
-int wmain(int argc, wchar_t** argv) {
+int wmain(int argc, wchar_t **argv) {
     if (argc != 2) {
         std::wcout << L"Usage: word lang\n";
         std::wcout << L"\tlang: Choose from de,en,es,fr,gr,it,la,pt,ru,sv\n\n";
@@ -75,10 +79,10 @@ int wmain(int argc, wchar_t** argv) {
     _setmode(_fileno(stdout), _O_U16TEXT);
 
     // Prep the filename for usage
-    const wchar_t* arg = argv[1];
+    const wchar_t *arg = argv[1];
     std::wstring filename(L".\\data\\dict\\");
     filename += std::wstring(arg) + std::wstring(L".dict");
-    const wchar_t* f = filename.c_str();
+    const wchar_t *f = filename.c_str();
 
     // Read the file and obtain the word
     std::vector<std::wstring> data = read_file(f);

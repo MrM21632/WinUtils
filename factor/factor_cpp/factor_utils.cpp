@@ -5,10 +5,10 @@
  *     - Trial division, which uses the Sieve of Atkin
  *     - Binary GCD algorithm, which is used by Pollard's rho algorithm
  *
- * Version:     1.3.0
+ * Version:     1.0.0-rc1
  * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
- * Last Edited: 12/10/2017, 10:18am
+ * Last Edited: 1/17/2018, 5:00pm
  */
 
 #include <cstdlib>
@@ -49,6 +49,7 @@ uint64_t gcd(uint64_t a, uint64_t b) {
         return gcd((b - a) >> 1, a);
 }
 
+
 /**
  * trial_div(): Trial Division. Computes the factors of a given integer, and
  * returns them in a vector.
@@ -64,7 +65,7 @@ std::map<uint64_t, uint64_t> trial_div(uint64_t n) {
         return factors;
     
     // Get a list of primes.
-    bool* is_prime = sieve_atkin(isqrt(n));
+    bool *is_prime = sieve_atkin(isqrt(n));
     
     // This loop runs for i in [2, isqrt(n)]:
     // 
@@ -96,6 +97,7 @@ std::map<uint64_t, uint64_t> trial_div(uint64_t n) {
     
     return factors;
 }
+
 
 /**
  * pollard(): Pollard's rho algorithm.

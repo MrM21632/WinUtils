@@ -4,10 +4,10 @@
  * we will limit the user to only unsigned 64-bit integers, as there (likely)
  * won't be much need for anything larger to be calculated.
  *
- * Version:     1.1.0
+ * Version:     1.0.0-rc1
  * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
- * Last Edited: 12/09/2017, 10:30pm
+ * Last Edited: 1/17/2018, 5:00pm
  */
 
 #include <cstdint>
@@ -64,7 +64,7 @@ uint64_t lcm(uint64_t a, uint64_t b) {
 }
 
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
     if (argc != 3) {
         std::printf("Usage: gcd_lcm a b\n");
         std::printf("\ta,b: In the range [0, 2^64)\n\n");

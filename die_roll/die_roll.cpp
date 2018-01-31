@@ -7,10 +7,10 @@
  *     - M is the modifier being applied (positive or negative).
  * This program also allows for more than one roll, if desired.
  *
- * Version:     1.2.0
+ * Version:     1.0.0-rc1
  * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
- * Last Edited: 12/09/2017, 10:10pm
+ * Last Edited: 1/17/2018, 5:00pm
  */
 
 #include <iostream>
@@ -22,7 +22,7 @@ std::random_device rd;
 std::mt19937 mt(rd());
 
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
     if (argc != 5) {
         std::cout << "Usage: die_roll total dice sides mod\n";
         std::cout << "\ttotal: Total rolls to make (> 0)\n";

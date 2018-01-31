@@ -3,30 +3,30 @@
  * ascending order with a considerably fast sorting algorithm. For purposes of
  * speed, we will be using Quicksort.
  *
- * Version:     1.1.0
+ * Version:     1.0.0-rc1
  * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
- * Last Edited: 12/09/2017, 11:05pm
+ * Last Edited: 1/17/2018, 5:00pm
  */
 
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <vector>
+#include <cstdint>
 #include <cstdlib>
 #include <ctime>
 
 
-typedef long long int lli;
-
 /**
- * swap(): XOR-Swap algorithm, defined for long long int.
+ * swap(): XOR-Swap algorithm, defined for 64-bit integers.
  *
- * Input:  lli *x, *y - the values to swap. It is required that they are not the
- *             exact same value (i.e., they don't have the same memory address).
+ * Input:  int64_t *x, *y - the values to swap. It is required that they are not
+ *             the exact same value (i.e., they don't have the same memory
+ *             address).
  * Output: N/A, because the values are swapped in-place.
  */
-void swap(lli* x, lli* y) {
+void swap(int64_t *x, int64_t *y) {
     if (x != y) {
         *x ^= *y;
         *y ^= *x;
@@ -38,15 +38,15 @@ void swap(lli* x, lli* y) {
  * quicksort(): In-place Quicksort algorithm for vectors. Sorts a vector of
  * elements in ascending order.
  *
- * Input:  std::vector<lli> &v - reference of vector to be sorted.
+ * Input:  std::vector<int64_t> &v - reference of vector to be sorted.
  *         int lo - lower bound for sorting.
  *         int hi - upper bound for sorting.
  * Output: N/A. Since the vector is sorted in-place, nothing needs to be
  *         returned.
  */
-void quicksort(std::vector<lli>& v, int lo, int hi) {
+void quicksort(std::vector<int64_t> &v, int lo, int hi) {
     if (lo < hi) {
-        lli pivot = v[(lo + hi) / 2];
+        int64_t pivot = v[(lo + hi) / 2];
         int left = lo, right = hi;
 
         while (left <= right) {
@@ -67,7 +67,7 @@ void quicksort(std::vector<lli>& v, int lo, int hi) {
 }
 
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
     if (argc != 2) {
         std::cout << "Usage: sort file" << std::endl;
         std::cout << "\tfile: File containing numbers to sort (Integers only).\n\n";
@@ -77,23 +77,25 @@ int main(int argc, char** argv) {
     
     clock_t start = std::clock();
     
-    std::vector<lli> data;
+    std::vector<int64_t> data;
     std::ifstream fin(argv[1]);
     std::ofstream fout("sorted.txt");
     
     std::string s;
     while (std::getline(fin, s)) {
-        lli x = static_cast<lli>(std::stoll(s));
+        int64_t x = static_cast<int64_t>(std::stoll(s));
         data.push_back(x);
     }
+    fin.close();
     
     quicksort(data, 0, data.size() - 1);
     
-    for (std::vector<lli>::iterator vit = data.begin(); vit != data.end(); ++vit)
-        fout << *vit << "\n";
+    for (std::vector<int64_t>::iterator it = data.begin(); it != data.end(); ++it)
+        fout << *it << "\n";
+    fout.close();
     
     clock_t end = std::clock();
     double time = static_cast<double>(end - start) / CLOCKS_PER_SEC;
     
-    std::cout << "Elapsed Time: " << time << " seconds.\n";
+    std::cout << "Process Completed. Elapsed Time: " << time << " seconds.\n";
 }

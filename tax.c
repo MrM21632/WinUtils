@@ -2,17 +2,17 @@
  * tax.c: Sales Tax Utility. Calculates a total amount owed given an initial
  * cost and a sales tax rate.
  * 
- * Version:     1.1.0
+ * Version:     1.0.0-rc1
  * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
- * Last Edited: 12/09/2017, 9:42pm
+ * Last Edited: 1/17/2018, 7:00pm
  */
 
 #include <stdio.h>
 #include <stdlib.h>
 
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
     if (argc != 3) {
         printf("Usage: tax cost rate\n");
         printf("\tcost: Initial cost. (Format: ##.##)\n");

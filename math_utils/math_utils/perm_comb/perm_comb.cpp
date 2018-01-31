@@ -8,10 +8,10 @@
  *     4. The r-combination of the set, C(n,r), both allowing and not allowing
  *        repetition of elements in the set.
  *
- * Version:     1.1.0
+ * Version:     1.0.0-rc1
  * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
- * Last Edited: 12/09/2017, 10:35pm
+ * Last Edited: 1/17/2018, 5:00pm
  */
 
 #include <cstdio>
@@ -113,7 +113,7 @@ void comb_rep(mpz_t res, mpir_ui n, mpir_ui r) {
 }
 
 
-int main(int argc, char** argv) {
+int main(int argc, char **argv) {
     if (argc != 3) {
         std::printf("Usage: perm_comb n r\n");
         std::printf("\tn: Number of elements to choose from.\n");
@@ -150,12 +150,12 @@ int main(int argc, char** argv) {
     double time = static_cast<double>(end - start) / CLOCKS_PER_SEC;
 
     // Convert the results to strings, for ease of output.
-    char* pa_str = mpz_get_str(NULL, 10, pa);
-    char* pn_str = mpz_get_str(NULL, 10, pn);
-    char* pr_str = mpz_get_str(NULL, 10, pr);
-    char* ca_str = mpz_get_str(NULL, 10, ca);
-    char* cn_str = mpz_get_str(NULL, 10, cn);
-    char* cr_str = mpz_get_str(NULL, 10, cr);
+    char *pa_str = mpz_get_str(NULL, 10, pa);
+    char *pn_str = mpz_get_str(NULL, 10, pn);
+    char *pr_str = mpz_get_str(NULL, 10, pr);
+    char *ca_str = mpz_get_str(NULL, 10, ca);
+    char *cn_str = mpz_get_str(NULL, 10, cn);
+    char *cr_str = mpz_get_str(NULL, 10, cr);
 
     // Output the results.
     std::printf("Process completed; took %.6f seconds.\n\n", time);
