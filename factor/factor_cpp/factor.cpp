@@ -107,14 +107,6 @@ std::map<uint64_t, uint64_t> factor(uint64_t n) {
 }
 
 
-/**
- *  @param [in] argc Number of command-line arguments passed to program
- *  @param [in] argv List of command-line arguments passed to program
- *  @return N/A.
- *  
- *  @details Main entry point for the program. Handles organizing the program's
- *           functionality and outputting the results.
- */
 int main(int argc, char **argv) {
     if (argc != 2) {
         std::printf("Usage: factor n\n");
