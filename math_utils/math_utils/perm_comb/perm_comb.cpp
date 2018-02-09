@@ -8,7 +8,7 @@
  *     4. The r-combination of the set, C(n,r), both allowing and not allowing
  *        repetition of elements in the set.
  *
- * Version:     1.0.0-rc1
+ * Version:     1.0.0
  * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
  * Last Edited: 1/17/2018, 5:00pm
@@ -21,12 +21,14 @@
 
 
 /**
- * perm_all(): Compute the total number of permutations for a set with given
- * cardinality n.
- *
- * Input:  mpz_t res - arbitrary-precision integer that holds the calculation.
- *         mpir_ui n - the cardinality (i.e., number of elements) of the set.
- * Output: N/A. The calculation is stored in res.
+ *  @brief All Permutations
+ *  
+ *  @param [in] res MPIR container for the result
+ *  @param [in] n   Cardinality of the "set"
+ *  @return N/A. The calculation is stored in res.
+ *  
+ *  @details Compute the total number of permutations for a "set" with
+ *           cardinality n.
  */
 void perm_all(mpz_t res, mpir_ui n) {
     // As it turns out, the desired value is exactly equal to n!, so all we need
@@ -35,12 +37,14 @@ void perm_all(mpz_t res, mpir_ui n) {
 }
 
 /**
- * comb_all(): Compute the total number of r-permutations for all r for a set
- * with given cardinality n.
- *
- * Input:  mpz_t res - arbitrary-precision integer that holds the calculation.
- *         mpir_ui n - the cardinality of the set.
- * Output: N/A. The calculation is stored in res.
+ *  @brief All r-Permutations for All r
+ *  
+ *  @param [in] res MPIR container for the result
+ *  @param [in] n   Cardinality of the "set"
+ *  @return N/A. The calculation is stored in res.
+ *  
+ *  @details Compute the total number of r-combinations for all r for a "set"
+ *           with cardinality n.
  */
 void comb_all(mpz_t res, mpir_ui n) {
     // As it turns out, the desired value is exactly equal to 2^n, so all we need
@@ -49,13 +53,14 @@ void comb_all(mpz_t res, mpir_ui n) {
 }
 
 /**
- * perm_no_rep(): Compute the r-permutation of a set with given cardinality n,
- * P(n, r), where repetition of elements is not allowed.
- *
- * Input:  mpz_t res - arbitrary-precision integer that holds the calculation.
- *         mpir_ui n - the cardinality of the set.
- *         mpir_ui r - the number of elements to select from the set.
- * Output: N/A. The calculation is stored in res.
+ *  @brief Permutations without Repetition
+ *  
+ *  @param [in] res MPIR container for the result
+ *  @param [in] n   Cardinality of the "set"
+ *  @param [in] r   Number of elements in the "set"
+ *  @return N/A. The calculation is stored in res.
+ *  
+ *  @details More details
  */
 void perm_no_rep(mpz_t res, mpir_ui n, mpir_ui r) {
     // Initialize res to 1.
@@ -68,13 +73,14 @@ void perm_no_rep(mpz_t res, mpir_ui n, mpir_ui r) {
 }
 
 /**
- * perm_rep(): Compute the r-permutation of a set with given cardinality n,
- * P(n, r), where repetition of elements is allowed.
- *
- * Input:  mpz_t res - arbitrary-precision integer that holds the calculation.
- *         mpir_ui n - the cardinality of the set.
- *         mpir_ui r - the number of elements to select from the set.
- * Output: N/A. The calculation is stored in res. 
+ *  @brief Permutations with Repetition
+ *  
+ *  @param [in] res MPIR container for the result
+ *  @param [in] n   Cardinality of the "set"
+ *  @param [in] r   Number of elements in the "set"
+ *  @return N/A. The calculation is stored in res.
+ *  
+ *  @details More details
  */
 void perm_rep(mpz_t res, mpir_ui n, mpir_ui r) {
     // As it turns out, the desired value is exactly equal to n^r, so all we need
@@ -83,13 +89,15 @@ void perm_rep(mpz_t res, mpir_ui n, mpir_ui r) {
 }
 
 /**
- * comb_no_rep(): Compute the r-combination of a set with given cardinality n,
- * C(n, r), where repetition of elements is not allowed.
- *
- * Input:  mpz_t res - arbitrary-precision integer that holds the calculation.
- *         mpir_ui n - the cardinality of the set.
- *         mpir_ui r - the number of elements to select from the set.
- * Output: N/A. The calculation is stored in res. 
+ *  @brief Combinations without Repetition
+ *  
+ *  @param [in] res MPIR container for the result
+ *  @param [in] n   Cardinality of the "set"
+ *  @param [in] r   Number of elements in the "set"
+ *  @return N/A. The calculation is stored in res.
+ *  
+ *  @details Compute the r-combination of a "set" with cardinality n. Repetition
+ *           of elements is not allowed.
  */
 void comb_no_rep(mpz_t res, mpir_ui n, mpir_ui r) {
     // C(n, r) is equivalent to the binomial coefficient "n choose r" when
@@ -98,13 +106,15 @@ void comb_no_rep(mpz_t res, mpir_ui n, mpir_ui r) {
 }
 
 /**
- * comb_rep(): Compute the r-combination of a set with given cardinality n,
- * C(n, r), where repetition of elements is allowed.
- *
- * Input:  mpz_t res - arbitrary-precision integer that holds the calculation.
- *         mpir_ui n - the cardinality of the set.
- *         mpir_ui r - the number of elements to select from the set.
- * Output: N/A. The calculation is stored in res. 
+ *  @brief Combinations with Repetition
+ *  
+ *  @param [in] res MPIR container for the result
+ *  @param [in] n   Cardinality of the "set"
+ *  @param [in] r   Number of elements in the "set"
+ *  @return N/A. The calculation is stored in res.
+ *  
+ *  @details Compute the r-combination of a "set" with cardinality n. Repetition
+ *           of elements is allowed.
  */
 void comb_rep(mpz_t res, mpir_ui n, mpir_ui r) {
     // C(n, r) is equivalent to "n multichoose r", or the binomial coefficient

@@ -3,7 +3,7 @@
  * received, calculate and output the total change owed, broken down into the
  * most common American currency values.
  *
- * Version:     1.0.0-rc1
+ * Version:     1.0.0
  * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
  * Last Edited: 1/17/2018, 7:00pm

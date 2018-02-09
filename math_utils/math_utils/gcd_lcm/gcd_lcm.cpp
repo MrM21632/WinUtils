@@ -4,7 +4,7 @@
  * we will limit the user to only unsigned 64-bit integers, as there (likely)
  * won't be much need for anything larger to be calculated.
  *
- * Version:     1.0.0-rc1
+ * Version:     1.0.0
  * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
  * Last Edited: 1/17/2018, 5:00pm
@@ -17,13 +17,15 @@
 
 
 /**
- * gcd_bin(): Greatest Common Divisor, as defined for Unsigned 64-bit Integers.
- * This specifically is the Binary GCD Algorithm, which is significantly faster
- * for large integers than the standard iterative and recursive definitions.
- *
- * Input:  uint64_t a, b - the numbers to calculate gcd() for.
- * Output: If b is 0, then we return a; the reverse applies as well. Otherwise,
- *         we call gcd() recursively until we finally return a value.
+ *  @brief Binary GCD Algorithm
+ *  
+ *  @param [in] a Operand
+ *  @param [in] b Operand
+ *  @return gcd(a, b).
+ *  
+ *  @details Computes the greatest common divisor (GCD) of two integers. This is
+ *           specifically the binary GCD algorithm, a variation of the standard
+ *           algorithm that heavily makes use of shift operations.
  */
 uint64_t gcd_bin(uint64_t a, uint64_t b) {
     // Base cases:
@@ -52,10 +54,14 @@ uint64_t gcd_bin(uint64_t a, uint64_t b) {
 }
 
 /**
- * lcm(): Least Common Multiple, as defined for Unsigned 64-bit Integers.
- *
- * Input:  uint64_t a, b - the numbers to calculate lcm() for.
- * Output: The properly calculated lcm(a,b).
+ *  @brief Least Common Multiple
+ *  
+ *  @param [in] a Operand
+ *  @param [in] b Operand
+ *  @return lcm(a, b).
+ *  
+ *  @details Computes the least common multiple (LCM) of two integers. This
+ *           definition uses a small trick to avoid overflow.
  */
 uint64_t lcm(uint64_t a, uint64_t b) {
     // The standard definition of LCM is ab / gcd(a,b). However, to avoid

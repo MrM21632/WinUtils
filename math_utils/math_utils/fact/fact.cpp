@@ -5,8 +5,8 @@
  *     3. The primorial, n#
  *     4. The derangement or subfactorial, !n
  *
- * Version:     1.0.0-rc1
- * License:     Public Domain
+ * Version:     1.0.0
+ * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
  * Last Edited: 1/17/2018, 5:00pm
  */
@@ -19,14 +19,14 @@
 
 
 /**
- * derange(): Compute the derangement of n, !n. This method uses the following
- * formula for calculating the derangement:
- * 
- *     !n = floor((n! / e) + 0.5).
- *
- * Input:  mpz_t res - arbitrary-precision integer to store the calculation.
- *         mpir_ui n - the number to compute the derangement of.
- * Output: N/A. The calculation is stored in res.
+ *  @brief Derangement (!n)
+ *  
+ *  @param [in] res MPIR container for the result
+ *  @param [in] n   Number to compute derangement for
+ *  @return N/A.
+ *  
+ *  @details Compute the derangement of n, !n. This method uses the following
+ *           formula for calculations: !n = floor((n! / e) + 0.5).
  */
 void derange(mpz_t res, mpir_ui n) {
     // Base Cases: !0 = 1, !1 = 0.

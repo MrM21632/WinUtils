@@ -2,7 +2,7 @@
  * tax.c: Sales Tax Utility. Calculates a total amount owed given an initial
  * cost and a sales tax rate.
  * 
- * Version:     1.0.0-rc1
+ * Version:     1.0.0
  * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
  * Last Edited: 1/17/2018, 7:00pm

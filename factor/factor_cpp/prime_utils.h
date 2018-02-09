@@ -9,25 +9,26 @@
  *     - Sieve of Atkin
  *     - Integer square root, which is used by the Sieve
  *
- * Version:     1.0.0-rc1
+ * Version:     1.0.0
  * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
- * Last Edited: 1/17/2018, 5:00pm
+ * Last Edited: 2/6/2018, 1:20am
  */
 
-#ifndef __GUARD__PRIME_UTILS_H_
-#define __GUARD__PRIME_UTILS_H_
+#ifndef __GUARD__PRIME_UTILS_H
+#define __GUARD__PRIME_UTILS_H
 
 // In order to use uint64_t, we need to include the stdint library
 #include <cstdint>
 
 /* Function Declarations */
-extern uint64_t isqrt(uint64_t);
-extern uint64_t mod_add(uint64_t, uint64_t, uint64_t);
-extern uint64_t mod_mult(uint64_t, uint64_t, uint64_t);
-extern uint64_t mod_pow(uint64_t, uint64_t, uint64_t);
-extern bool miller_rabin(uint64_t, uint64_t);
-extern bool is_prime(uint64_t, uint64_t);
-extern bool *sieve_atkin(uint64_t);
 
-#endif  // __GUARD__PRIME_UTILS_H_
+uint64_t isqrt(uint64_t);
+uint64_t mod_add(uint64_t, uint64_t, uint64_t);
+uint64_t mod_mult(uint64_t, uint64_t, uint64_t);
+uint64_t mod_pow(uint64_t, uint64_t, uint64_t);
+bool miller_rabin(uint64_t, uint64_t);
+bool is_prime(uint64_t, uint64_t);
+bool *sieve_of_atkin(uint64_t);
+
+#endif  // __GUARD__PRIME_UTILS_H

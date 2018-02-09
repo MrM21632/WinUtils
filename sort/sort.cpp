@@ -3,7 +3,7 @@
  * ascending order with a considerably fast sorting algorithm. For purposes of
  * speed, we will be using Quicksort.
  *
- * Version:     1.0.0-rc1
+ * Version:     1.0.0
  * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
  * Last Edited: 1/17/2018, 5:00pm
@@ -19,12 +19,13 @@
 
 
 /**
- * swap(): XOR-Swap algorithm, defined for 64-bit integers.
- *
- * Input:  int64_t *x, *y - the values to swap. It is required that they are not
- *             the exact same value (i.e., they don't have the same memory
- *             address).
- * Output: N/A, because the values are swapped in-place.
+ *  @brief XOR Swap
+ *  
+ *  @param [in] x Operand
+ *  @param [in] y Operand
+ *  @return N/A.
+ *  
+ *  @details Swaps two integers in-place using XOR operations.
  */
 void swap(int64_t *x, int64_t *y) {
     if (x != y) {
@@ -35,14 +36,15 @@ void swap(int64_t *x, int64_t *y) {
 }
 
 /**
- * quicksort(): In-place Quicksort algorithm for vectors. Sorts a vector of
- * elements in ascending order.
- *
- * Input:  std::vector<int64_t> &v - reference of vector to be sorted.
- *         int lo - lower bound for sorting.
- *         int hi - upper bound for sorting.
- * Output: N/A. Since the vector is sorted in-place, nothing needs to be
- *         returned.
+ *  @brief Quicksort
+ *  
+ *  @param [in] v  Reference to container to be sorted
+ *  @param [in] lo Lower bound for sorting
+ *  @param [in] hi Upper bound for sorting
+ *  @return N/A.
+ *  
+ *  @details Performs quicksort in-place on a vector, sorting its contents. Uses
+ *           XOR swap to swap the vector's contents.
  */
 void quicksort(std::vector<int64_t> &v, int lo, int hi) {
     if (lo < hi) {

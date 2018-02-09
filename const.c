@@ -13,7 +13,7 @@
  * size. Such files can be found across the Internet, and/or can be generated on
  * your own using programs such as y-cruncher.
  *
- * Version:     1.0.0-rc1
+ * Version:     1.0.0
  * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
  * Last Edited: 1/17/2018, 7:00pm

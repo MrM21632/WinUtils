@@ -2,25 +2,30 @@
  * primes.c: Prime Generation Utility. Generates a list of primes up to a given
  * bound.
  *
- * Version:     1.0.0-rc1
+ * Version:     1.0.0
  * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
- * Last Edited: 1/17/2018, 7:00pm
+ * Last Edited: 2/8/2018, 8:00pm
  */
 
-#include <stdbool.h>
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 
+// Boolean value definitions
+#define FALSE (0)
+#define TRUE  (1)
+
 
 /**
- * isqrt(): Integer Square Root, as defined for Unsigned 64-bit Integers.
- *
- * Input:  uint32_t n - the number to take the square root of.
- * Output: A value equivalent to floor(sqrt(n)).
+ *  @brief Integer Square Root
+ *  
+ *  @param [in] n Operand
+ *  @return An integer equivalent to (uint64_t)floor(sqrt(n)).
+ *  
+ *  @details Computes the integer square root of a given integer.
  */
 uint32_t isqrt(uint32_t n) {
     // Base Case: if n < 2, then sqrt(n) == n, so just return n.
@@ -39,22 +44,25 @@ uint32_t isqrt(uint32_t n) {
 }
 
 /**
- * sieve(): Sieve of Atkin. Returns a list of boolean values, where true
- * denotes a prime number and false denotes a composite number. This algorithm
- * is, in essence, an improvement of the Sieve of Eratosthenes.
- *
- * Input:  uint32_t n - the upper bound for sieving.
- * Output: An array as described above.
+ *  @brief Sieve of Atkin
+ *  
+ *  @param [in] n Upper bound for the sieve
+ *  @return A list of "integers" marked for primality.
+ *  
+ *  @details Performs the sieve of Atkin, a variation of the sieve of
+ *           Eratosthenes, to generate a list of all primes up to a given upper
+ *           bound.
  */
-bool *sieve(uint32_t n) {
+uint8_t *sieve_of_atkin(uint32_t n) {
     // calloc() initializes each cell to 0, which makes our setup much easier.
-    bool *data = calloc(n + 1, sizeof(bool));
-    data[2] = true;
-    data[3] = true;
+    uint8_t *data = calloc((size_t) n + 1, sizeof(uint8_t));
+    data[2] = (uint8_t) TRUE;
+    data[3] = (uint8_t) TRUE;
     uint32_t lim = isqrt(n);
     
     // This loop runs for all x in [1, lim].
-    for (uint32_t x = 1; x <= lim; ++x) {
+    uint32_t x;
+    for (x = 1; x <= lim; ++x) {
         // This loop runs for all y in [1, lim].
         // 
         // k is prime if any of the following are true:
@@ -63,7 +71,8 @@ bool *sieve(uint32_t n) {
         //     3. For k = 3*x^2 - y^2, k is prime iff k mod 12 = 11.
         // All of these also assume that k is not greater than n, and for the
         // third case, that k is not negative (i.e., that x > y).
-        for (uint32_t y = 1; y <= lim; ++y) {
+        uint32_t y;
+        for (y = 1; y <= lim; ++y) {
             uint32_t k = (4*x*x) + (y*y);
             if ((k <= n) && ((k % 12 == 1) || (k % 12 == 5)))
                 data[k] = !data[k];
@@ -83,10 +92,12 @@ bool *sieve(uint32_t n) {
     // We perform one last loop through the array. If j is prime, then we mark
     // all multiples of its square as composite, a la the standard Sieve of
     // Eratosthenes.
-    for (uint32_t j = 5; j <= lim; ++j) {
+    uint32_t j;
+    for (j = 5; j <= lim; ++j) {
         if (data[j]) {
-            for (uint32_t k = j*j; k <= n; k += j*j)
-                data[k] = false;
+            uint32_t k;
+            for (k = j*j; k <= n; k += j*j)
+                data[k] = (uint8_t) FALSE;
         }
     }
     
@@ -104,14 +115,15 @@ int main(int argc, char **argv) {
     
     // NOTE: we limit n to a 32-bit integer because of the limitations of arrays
     // in C/C++. At most, an array can hold SIZE_MAX elements, which is equal to
-    // the upper limit of uint32_t.
+    // the upper limit of uint32_t. Realistically, you aren't even going to be
+    // able to fit that many values in an array.
     char *cend;
     uint32_t n = (uint32_t) strtoul(argv[1], &cend, 10);
     FILE *primes_file = fopen("primes.txt", "w");
     uint32_t count = 0;
     
     clock_t start = clock();
-    bool *is_prime = sieve(n);
+    uint8_t *is_prime = sieve_of_atkin(n);
     
     uint32_t k;
     for (k = 0; k <= n; ++k) {

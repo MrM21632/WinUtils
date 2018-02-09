@@ -5,10 +5,10 @@
  *     - Trial division, which uses the Sieve of Atkin
  *     - Binary GCD algorithm, which is used by Pollard's rho algorithm
  *
- * Version:     1.0.0-rc1
+ * Version:     1.0.0
  * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
- * Last Edited: 1/17/2018, 5:00pm
+ * Last Edited: 2/6/2018, 1:20am
  */
 
 #include <cstdlib>
@@ -16,21 +16,21 @@
 
 
 /**
- * gcd(): Greatest Common Divisor, as defined for Unsigned 64-bit Integers. This
- * specifically is the binary algorithm for calculating GCD.
- *
- * Input:  uint64_t a, b - the numbers to calculate gcd() for.
- * Output: If either a or b is 0, then we return the other value. Otherwise, we
- *         call gcd() recursively until we can return a value.
+ *  @brief Binary GCD Algorithm
+ *  
+ *  @param [in] a Operand
+ *  @param [in] b Operand
+ *  @return gcd(a, b).
+ *  
+ *  @details Computes the greatest common divisor (GCD) of two integers. This is
+ *           specifically the binary GCD algorithm, a variation of the standard
+ *           algorithm that heavily makes use of shift operations.
  */
 uint64_t gcd(uint64_t a, uint64_t b) {
     // Base cases
-    if (a == b)
-        return a;
-    if (a == 0)
-        return b;
-    if (b == 0)
-        return a;
+    if (a == b) return a;
+    if (a == 0) return b;
+    if (b == 0) return a;
 
     // Looking for factors of 2
     if (!(a & 1)) {  // a is even
@@ -51,13 +51,21 @@ uint64_t gcd(uint64_t a, uint64_t b) {
 
 
 /**
- * trial_div(): Trial Division. Computes the factors of a given integer, and
- * returns them in a vector.
- *
- * Input:  uint64_t n - the number to be factored.
- * Output: A vector<uint64_t> as described above.
+ *  @brief Trial Division
+ *  
+ *  @param [in] n The number to factorize
+ *  @return A collection of the factors of n. Each entry is a pair of the format
+ *          (f, m), where f is a factor of n and m is the number of times f is
+ *          factored out of n.
+ *  
+ *  @details Performs trial division on a given integer, computing and collecting
+ *           its factors. This is the simplest factorization algorithm, and
+ *           consequently is best used for smaller numbers and/or those with
+ *           especially simple prime decompositions, as it is used here. This
+ *           implementation uses the sieve of Atkin to simplify some operations
+ *           and loops.
  */
-std::map<uint64_t, uint64_t> trial_div(uint64_t n) {
+std::map<uint64_t, uint64_t> trial_division(uint64_t n) {
     // Base case: If n < 2, return an empty map.
     std::map<uint64_t, uint64_t> factors;
     
@@ -65,12 +73,13 @@ std::map<uint64_t, uint64_t> trial_div(uint64_t n) {
         return factors;
     
     // Get a list of primes.
-    bool *is_prime = sieve_atkin(isqrt(n));
+    bool *is_prime = sieve_of_atkin(isqrt(n));
     
     // This loop runs for i in [2, isqrt(n)]:
     // 
     // Go through the list of integers (above), factoring out each prime value
-    // from n. We stop once the square of our current prime exceeds n.
+    // from n completely. We stop once the square of our current prime exceeds
+    // n.
     for (uint64_t i = 2; i <= isqrt(n); ++i) {
         if (is_prime[i]) {
             if (i*i > n) break;
@@ -100,11 +109,15 @@ std::map<uint64_t, uint64_t> trial_div(uint64_t n) {
 
 
 /**
- * pollard(): Pollard's rho algorithm.
- *
- * Input:  uint64_t n - the number to be factored.
- *         uint64_t c - a "constant" used for calculations.
- * Output: A non-trivial, though not necessarily prime, factor of n.
+ *  @brief Pollard's Rho Algorithm
+ *  
+ *  @param [in] n The number being factorized
+ *  @param [in] c Constant summand used in the function
+ *  @return A non-trivial factor of n.
+ *  
+ *  @details Performs Pollard's rho algorithm to compute a single, non-trivial
+ *           (i.e., not 1 or the number itself) factor of a given integer. This
+ *           implementation uses Floyd's cycle-detection algorithm.
  */
 uint64_t pollard(uint64_t n, uint64_t c) {
     // Initialize the following values:
@@ -114,6 +127,10 @@ uint64_t pollard(uint64_t n, uint64_t c) {
     
     // This loop runs until d is not 1. This means that d will either be a
     // non-trivial factor of n, or be equal to n.
+    // 
+    // t takes one step forward, and h takes two steps forward. We then compute
+    // d by finding the greatest common divisor of the absolute value of t-h and
+    // n.
     while (d == 1) {
         t = mod_add(t*t, c, n);
         h = mod_add(h*h, c, n);
@@ -121,6 +138,8 @@ uint64_t pollard(uint64_t n, uint64_t c) {
         d = gcd((t > h ? t-h : h-t), n);
     }
     
+    // If d is still trivial (i.e., d == n), we increment our summand and start
+    // over.
     if (d == n)
         return pollard(n, c + 1);
     else

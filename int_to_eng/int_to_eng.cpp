@@ -2,7 +2,7 @@
  * int_to_eng.cpp: Number-to-English Utility. Given an integer in the range
  * (-2^63, 2^63), output the number in correct English notation.
  *
- * Version:     1.0.0-rc1
+ * Version:     1.0.0
  * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
  * Last Edited: 1/17/2018, 5:00pm
@@ -20,10 +20,13 @@ std::string ones[10] = { "zero", "one ", "two ", "three ", "four ", "five ", "si
 
 
 /**
- * abs(): Calculate the absolute value of n.
- *
- * Input:  int64_t n - the number to perform the operation on.
- * Output: |n|.
+ *  @brief Specialized abs() method for int64_t
+ *  
+ *  @param [in] n Number to check absolute value of
+ *  @return -1 if n is negative, 0 if n is 0, or 1 if n is positive.
+ *  
+ *  @details Determines the absolute value using a special bitwise calculation.
+ *           This is used to avoid type conversion.
  */
 int64_t int64_abs(int64_t n) {
     int64_t mask = n >> ((sizeof(int64_t) * CHAR_BIT) - 1);
@@ -31,10 +34,13 @@ int64_t int64_abs(int64_t n) {
 }
 
 /**
- * to_english(): Converts the given number to its proper English equivalent.
- *
- * Input:  int64_t n - the number in question.
- * Output: The English equivalent of n.
+ *  @brief Integer-to-English Conversion Algorithm
+ *  
+ *  @param [in] n Number to convert
+ *  @return A string containing the number in (American) English.
+ *  
+ *  @details Converts the given number to (American) English using modular
+ *           arithmetic.
  */
 std::string to_english(int64_t n) {
     // Setup the string to be returned. If the number is negative, set the string

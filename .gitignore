@@ -9,8 +9,6 @@ x64/
 
 # Test files for Factorization Utility, and additional folders for factor_cpp
 /factor/factor_c
-/factor/primality
-/factor/factor.py
 
 # We will ignore any and all Visual Studio files as well.
 .vs/

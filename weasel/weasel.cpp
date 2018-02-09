@@ -6,7 +6,7 @@
  * This version of the algorithm allows the user to select the target, the number
  * of copies per generation, and the chance for each character to mutate.
  *
- * Version:     1.0.0-rc1
+ * Version:     1.0.0
  * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
  * Last Edited: 1/17/2018, 5:00pm
@@ -34,11 +34,13 @@ std::uniform_int_distribution<int> get_char(0, chars_len - 1);
 
 
 /**
- * fitness(): Determine how "fit" the given string is - that is, how close it is
- * to the target string.
- *
- * Input:  const std::string& s - the string to test.
- * Output: The fitness score of s.
+ *  @brief Fitness Calculator
+ *  
+ *  @param [in] s String to observe
+ *  @return The string's fitness score.
+ *  
+ *  @details Determines the fitness of a given string ("copy") by comparing it
+ *           character-by-character to the target.
  */
 int fitness(const std::string &s) {
     int score = 0;
@@ -52,12 +54,14 @@ int fitness(const std::string &s) {
 }
 
 /**
- * mutate(): Generates a mutated clone of the given string using the given
- * mutation chance.
- *
- * Input:  std::string s - the string to clone.
- *         int m - the chance for a single character to mutate.
- * Output: A (possibly mutated) clone of s.
+ *  @brief Mutation Method
+ *  
+ *  @param [in] s String to (possibly) mutate
+ *  @param [in] m Chance for mutation per character
+ *  @return A mutated copy of the string.
+ *  
+ *  @details Generates a copy of the given string, while simultaneously testing
+ *           each character to see if it mutates.
  */
 std::string mutate(std::string s, int m) {
     for (int i = 0; i < len; ++i) {
@@ -70,21 +74,27 @@ std::string mutate(std::string s, int m) {
 }
 
 /**
- * less_fit(): Comparison method for std::max_element. Determines if s1 is less
- * fit than s2.
- *
- * Input:  std::string &s1, &s2 - the strings to compare.
- * Output: true if s1 is less fit, false otherwise.
+ *  @brief Comparison Method for std::max_element
+ *  
+ *  @param [in] s1 Operand
+ *  @param [in] s2 Operand
+ *  @return true if s1 is less fit than s2, false otherwise.
+ *  
+ *  @details Determines whether the fitness of the first string is less than
+ *           that of the second string. This is used by std::max_element in
+ *           the main element.
  */
 bool less_fit(const std::string &s1, const std::string &s2) {
     return fitness(s1) < fitness(s2);
 }
 
 /**
- * isupper(): C-like comparison method to see if a character is uppercase only.
- *
- * Input:  char c - the character to check.
- * Output: true if c is uppercase, false otherwise.
+ *  @brief C-like Comparison Method for Uppercase Characters
+ *  
+ *  @param [in] c Character to check
+ *  @return true if c is uppercase, false otherwise.
+ *  
+ *  @details Determines if a given character is strictly uppercase.
  */
 bool isupper(char c) {
     return c >= 'A' && c <= 'Z';
@@ -94,7 +104,7 @@ bool isupper(char c) {
 int main(int argc, char **argv) {
     if (argc != 4) {
         std::cout << "Usage: weasel target copies mutate\n";
-        std::cout << "\ttarget: Target string (UPPERCASE only)\n";
+        std::cout << "\ttarget: Target string (UPPERCASE and SPACE only)\n";
         std::cout << "\tcopies: Total children per generation\n";
         std::cout << "\tmutate: Chance to mutate (1 <= mutate <= 100)\n\n";
         std::cout << "Simulates Dawkins' famed \"Weasel Algorithm.\"\n";

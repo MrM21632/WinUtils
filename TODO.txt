@@ -1,7 +1,4 @@
 all:
-    - Update version number to "1.0.0".
-    - Make the header comments for methods cleaner and neater. Preferably, use
-      something like Doxygen for this.
     - Ensure the variable and method names make sense.
 
 die_roll, factor, math_utils/prime_test, num_gen, weasel, word

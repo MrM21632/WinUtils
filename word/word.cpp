@@ -5,7 +5,7 @@
  * If you plan to use this on a different platform, you will need to make some
  * changes to this code for it to work correctly.
  *
- * Version:     1.0.0-rc1
+ * Version:     1.0.0
  * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
  * Last Edited: 1/17/2018, 5:00pm
@@ -27,10 +27,13 @@
 
 
 /**
- * read_file(): Reads the contents of a file. Supports Unicode text.
- *
- * Input:  const wchar_t *file - the name of the file to read in.
- * Output: A vector of the file's lines.
+ *  @brief Read a File's Contents to a Vector
+ *  
+ *  @param [in] file File to be read
+ *  @return A vector containing all words in the file.
+ *  
+ *  @details Reads the file line-by-line (each line should be a single word) and
+ *           enters them into a vector.
  */
 std::vector<std::wstring> read_file(const wchar_t *file) {
     std::vector<std::wstring> data;
@@ -47,10 +50,12 @@ std::vector<std::wstring> read_file(const wchar_t *file) {
 }
 
 /**
- * get_line(): Randomly selects a string from a vector of strings.
- *
- * Input:  const std::vector<std::wstring> &data - Reference to the vector.
- * Output: A randomly selected string from the vector.
+ *  @brief Randomly Select a String
+ *  
+ *  @param [in] data Reference of vector to choose string from
+ *  @return A randomly-chosen string from the vector.
+ *  
+ *  @details Randomly chooses a string from the given vector.
  */
 std::wstring get_line(const std::vector<std::wstring> &data) {
     int size = data.size();

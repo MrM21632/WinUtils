@@ -2,7 +2,7 @@
  * prime_test.cpp: Math Utility #6. Determine if the given integer is prime, then
  * find and output the next prime starting from the same integer.
  *
- * Version:     1.0.0-rc1
+ * Version:     1.0.0
  * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
  * Last Edited: 1/17/2018, 5:00pm
@@ -24,25 +24,32 @@ std::mt19937 mt(rd());
 
 
 /**
-* mod_add(): Modular Addition, as defined for Unsigned 64-bit Integers. This
-* ensures integer overflow is avoided.
-*
-* Input:  uint64_t a, b - the addends/summands/terms/etc.
-*         uint64_t n - the modulus.
-* Output: (a + b) mod n.
-*/
+ *  @brief Modular Addition
+ *  
+ *  @param [in] a Summand
+ *  @param [in] b Summand
+ *  @param [in] n Modulus
+ *  @return (a + b) mod n.
+ *  
+ *  @details Performs modular addition on two integers with a given modulus.
+ *           This implementation is written so as to avoid integer overflow.
+ */
 uint64_t mod_add(uint64_t a, uint64_t b, uint64_t n) {
     return ((a % n) + (b % n)) % n;
 }
 
 /**
-* mod_mult(): Modular Multiplication, as defined for Unsigned 64-bit Integers.
-* This ensures integer overflow is avoided.
-*
-* Input:  uint64_t a, b - the multiplicand and multiplier, respectively.
-*         uint64_t n - the modulus.
-* Output: (a * b) mod n.
-*/
+ *  @brief Modular Multiplication
+ *  
+ *  @param [in] a Multiplicand
+ *  @param [in] b Multiplier
+ *  @param [in] n Modulus
+ *  @return ab mod n.
+ *  
+ *  @details Performs modular multiplication on two integers with a given
+ *           modulus. This implementation is written so as to avoid integer
+ *           overflow.
+ */
 uint64_t mod_mult(uint64_t a, uint64_t b, uint64_t n) {
     uint64_t r = 0;  // Remainder, to be returned
 
@@ -66,13 +73,17 @@ uint64_t mod_mult(uint64_t a, uint64_t b, uint64_t n) {
 }
 
 /**
-* mod_pow(): Modular Exponentiation, as defined for Unsigned 64-bit Integers.
-* This ensures integer overflow is avoided.
-*
-* Input:  uint64_t a, b - the base and exponent, respectively.
-*         uint64_t n - the modulus.
-* Output: a^b mod n.
-*/
+ *  @brief Modular Exponentiation
+ *  
+ *  @param [in] a Base
+ *  @param [in] b Exponent
+ *  @param [in] n Modulus
+ *  @return a^b mod n.
+ *  
+ *  @details Performs modular exponentiation on two integers with a given
+ *           modulus. This implementation is written so as to avoid integer
+ *           overflow.
+ */
 uint64_t mod_pow(uint64_t a, uint64_t b, uint64_t n) {
     uint64_t r = 1;  // Remainder, to be returned
 
@@ -94,14 +105,15 @@ uint64_t mod_pow(uint64_t a, uint64_t b, uint64_t n) {
 }
 
 /**
-* miller_rabin(): Main algorithm for the Miller-Rabin primality test. Returns a
-* probabilistic "guess" of whether or not n is prime.
-*
-* Input:  uint64_t n - the number to test for primality.
-*         uint64_t d - an odd integer > 1, such that n - 1 = d * 2^r for some
-*                      integer r > 1.
-* Output: true if n is (likely) prime, or false if n is composite.
-*/
+ *  @brief Miller-Rabin Primality Test
+ *  
+ *  @param [in] n Number to test for primality; must be odd
+ *  @param [in] d A divisor of n-1; must be odd
+ *  @return Returns true if n is likely prime, or false otherwise.
+ *  
+ *  @details Performs a non-deterministic primality test on a given integer to
+ *           determine if it is composite or (likely) prime.
+ */
 bool miller_rabin(uint64_t n, uint64_t d) {
     std::uniform_int_distribution<uint64_t> dist(2, n - 2);
 
@@ -128,13 +140,16 @@ bool miller_rabin(uint64_t n, uint64_t d) {
 }
 
 /**
-* is_prime(): Function that calls miller_rabin() a number of times, as a means
-* of improving the accuracy of the test.
-*
-* Input:  uint64_t n - the number to test for primality.
-*         uint64_t k - the number of times to repeat the test.
-* Output: true if every test succeeds, false otherwise.
-*/
+ *  @brief Main Primality Test Algorithm
+ *  
+ *  @param [in] n Number to test for primality; must be odd
+ *  @param [in] k Number of times to repeat the test
+ *  @return Returns true if n is likely prime, or false otherwise.
+ *  
+ *  @details Performs a series of non-deterministic primality tests on a given
+ *           integer to determine if it is composite or (likely) prime. If any
+ *           test fails, we immediately assume compositeness.
+ */
 bool is_prime(uint64_t n, uint64_t k) {
     // Base cases
     if (n <= 1) return false;
@@ -162,11 +177,13 @@ bool is_prime(uint64_t n, uint64_t k) {
 }
 
 /**
-* next_prime(): Determines the next prime after a given starting point, n.
-*
-* Input:  uint64_t n - the starting point for the prime search.
-* Output: The next prime number following n. Note that n itself can be prime.
-*/
+ *  @brief Find the Next Prime
+ *  
+ *  @param [in] n Start point for prime search
+ *  @return The next prime number after n.
+ *  
+ *  @details Looks for the next prime number to occur after the given integer.
+ */
 uint64_t next_prime(uint64_t n) {
     // This loop runs for all i in [n+1, inf).
     // 

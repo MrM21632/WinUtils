@@ -1,10 +1,10 @@
 /*
- * factor.cpp: Main method and algorithm for Factorization utility.
+ * factor.cpp: Main method and algorithm for factorization utility.
  *
- * Version:     1.0.0-rc1
+ * Version:     1.0.0
  * License:     MIT License (see LICENSE.txt for more details)
  * Author:      Joshua Morrison (MrM21632)
- * Last Edited: 1/17/2018, 5:00pm
+ * Last Edited: 2/6/2018, 1:20am
  */
 
 #include <cstdio>
@@ -18,15 +18,21 @@
 
 
 /**
- * factor(): Main factorization method.
- *
- * Input:  uint64_t n - the number to factorize.
- * Output: A dynamic_array of n's factors.
+ *  @brief High-level Factorization Algorithm
+ *  
+ *  @param [in] n Number to be factorized
+ *  @return A collection of the factors of n. Each entry is a pair of the format
+ *          (f, m), where f is a factor of n and m is the number of times f is
+ *          factored out of n.
+ *  
+ *  @details Performs a higher-level factorization algorithm, using primality
+ *           tests, Pollard's rho algorithm, and trial division for smaller
+ *           tasks.
  */
 std::map<uint64_t, uint64_t> factor(uint64_t n) {
     // First, we handle the base cases.
     //     1. If n <= 1, return an empty map.
-    //     2. If n <= 3, return {{n => 1}}.
+    //     2. If n <= 3, return {(n, 1)}.
     std::map<uint64_t, uint64_t> n_factors;
     
     if (n <= 1)
@@ -76,7 +82,7 @@ std::map<uint64_t, uint64_t> factor(uint64_t n) {
                 n_factors.insert(std::map<uint64_t, uint64_t>::value_type(f, 1));
         }
         else {
-            std::map<uint64_t, uint64_t> f_factors = trial_div(f);
+            std::map<uint64_t, uint64_t> f_factors = trial_division(f);
 
             for (std::map<uint64_t, uint64_t>::iterator it = f_factors.begin(); it != f_factors.end(); ++it) {
                 if (n_factors.find(it->first) != n_factors.end())
@@ -101,6 +107,14 @@ std::map<uint64_t, uint64_t> factor(uint64_t n) {
 }
 
 
+/**
+ *  @param [in] argc Number of command-line arguments passed to program
+ *  @param [in] argv List of command-line arguments passed to program
+ *  @return N/A.
+ *  
+ *  @details Main entry point for the program. Handles organizing the program's
+ *           functionality and outputting the results.
+ */
 int main(int argc, char **argv) {
     if (argc != 2) {
         std::printf("Usage: factor n\n");
