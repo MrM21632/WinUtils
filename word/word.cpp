@@ -2,8 +2,8 @@
  * word.cpp: Word Utility. Randomly prints out a word from a list of words from
  * a specified language.
  * This program has been heavily specialized to work in Windows' Command Prompt.
- * If you plan to use this on a different platform, you will need to make some
- * changes to this code for it to work correctly.
+ * If you plan to use this on a different platform, you will need to make
+ * extensive changes to this code for it to work correctly.
  *
  * Version:     1.0.0
  * License:     MIT License (see LICENSE.txt for more details)

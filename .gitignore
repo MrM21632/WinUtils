@@ -7,6 +7,9 @@ Debug/
 Release/
 x64/
 
+# Doxygen-generated documentation
+doc/
+
 # Test files for Factorization Utility, and additional folders for factor_cpp
 /factor/factor_c
 

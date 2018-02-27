@@ -220,7 +220,7 @@ bool *sieve_of_atkin(uint64_t n) {
     bool *data = new bool[n + 1]();
     data[2] = true;
     data[3] = true;
-	uint64_t lim = isqrt(n);
+    uint64_t lim = isqrt(n);
     
     // This loop runs for all x in [1, lim].
     for (uint64_t x = 1; x <= lim; ++x) {
@@ -233,7 +233,7 @@ bool *sieve_of_atkin(uint64_t n) {
         // All of these also assume that k is not greater than n, and for the
         // third case, that k is not negative (i.e., that x > y).
         for (uint64_t y = 1; y <= lim; ++y) {
-			uint64_t k = (4*x*x) + (y*y);
+            uint64_t k = (4*x*x) + (y*y);
             if ((k <= n) && ((k % 12 == 1) || (k % 12 == 5)))
                 data[k] = !data[k];
             
