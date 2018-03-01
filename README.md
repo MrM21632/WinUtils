@@ -1,4 +1,4 @@
-# util_bin
+# WinUtils
 
 This is a collection of command-line utilities originally written for Windows' Command Prompt, but many of the source files included here are portable to UNIX-like (i.e., macOS, BSD, and Linux distros) systems, although some small changes will likely need to be made.
 
