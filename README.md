@@ -37,7 +37,7 @@ Please consult the source code for additional details on how to use each utility
 
 ### Bug Reports and Utility/Feature Requests
 
-Please feel free to alert me of any potential bugs or vulnerabilities you may encounter when using this code by using the [issue tracker](https://github.com/MrM21632/util_bin/issues).
+Please feel free to alert me of any potential bugs or vulnerabilities you may encounter when using this code by using the [issue tracker](https://github.com/MrM21632/WinUtils/issues).
 
 If you have any suggestions for adding functionality to a utility, or if you wish to request a utility for this repo, please feel free to message me about this as well.
 

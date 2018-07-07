@@ -37,7 +37,7 @@ void perm_all(mpz_t res, mpir_ui n) {
 }
 
 /**
- *  @brief All r-Permutations for All r
+ *  @brief All r-Combinations for All r
  *  
  *  @param [in] res MPIR container for the result
  *  @param [in] n   Cardinality of the "set"

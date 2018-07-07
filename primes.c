@@ -107,10 +107,11 @@ uint8_t *sieve_of_atkin(uint32_t n) {
 
 int main(int argc, char **argv) {
     if (argc != 2) {
-        printf("Usage: primes n\n");
-        printf("\tn: Bound for the sieve (Max 2^32 - 1)\n\n");
-        printf("Generate a list of primes below a given bound.\n");
-        exit(EXIT_FAILURE);
+        printf("Usage: primes bound\n");
+        printf("Generate a list of primes below a given bound.\n\n");
+        printf("bound\t\tBound for the sieve (Max 2^32 - 1)\n");
+        
+        return EXIT_FAILURE;
     }
     
     // NOTE: we limit n to a 32-bit integer because of the limitations of arrays
