@@ -3,12 +3,5 @@ all:
     - Add other compilation options (Makefiles, GCC/G++, Clang, etc.)
     - Make tests for each utility
 
-die_roll, factor, math_utils/prime_test, num_gen, weasel, word
-    - Find a viable C PRNG library (or write your own :) ) and use this in place
-      of <random>. If rand() is good enough, then just use that.
-    - Consequently, convert these utilities to C once the above library is
-      found/written.
-
-factor
-    - For factor_c: build or find a viable alternative to std::map for C (an
-      associative array or hash table would work best).
+math_utils/prime_test, weasel
+    - Convert these utilities to C with the PCG algorithms.

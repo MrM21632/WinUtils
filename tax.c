@@ -15,9 +15,9 @@
 int main(int argc, char **argv) {
     if (argc != 3) {
         printf("Usage: tax cost rate\n");
-        printf("\tcost: Initial cost. (Format: ##.##)\n");
-        printf("\trate: Sales tax rate. (Format: ##.##)\n\n");
-        printf("Calculates total amount owed after adding sales tax.\n");
+        printf("Calculates total amount owed after adding sales tax.\n\n");
+        printf("cost\t\tInitial cost. Format: ##.##\n");
+        printf("rate\t\tSales tax rate. Format: ##.##\n");
         return EXIT_FAILURE;
     }
     

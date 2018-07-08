@@ -104,10 +104,10 @@ bool isupper(char c) {
 int main(int argc, char **argv) {
     if (argc != 4) {
         std::cout << "Usage: weasel target copies mutate\n";
-        std::cout << "\ttarget: Target string (UPPERCASE and SPACE only)\n";
-        std::cout << "\tcopies: Total children per generation\n";
-        std::cout << "\tmutate: Chance to mutate (1 <= mutate <= 100)\n\n";
-        std::cout << "Simulates Dawkins' famed \"Weasel Algorithm.\"\n";
+        std::cout << "Simulates Dawkins' famed \"Weasel Algorithm.\"\n\n";
+        std::cout << "target\t\tTarget string (UPPERCASE and SPACE only)\n";
+        std::cout << "copies\t\tTotal children per generation\n";
+        std::cout << "mutate\t\tChance to mutate (1 <= mutate <= 100)\n";
         return EXIT_FAILURE;
     }
     

@@ -17,17 +17,12 @@
 
 #include <cstdlib>
 #include <random>
+// #include <boost/random/mersenne_twister.hpp>
+// #include <boost/random/random_device.hpp>
+// #include <boost/random/uniform_int_distribution.hpp>
 #include "prime_utils.h"
 
 
-/**
- *  @brief Integer Square Root
- *  
- *  @param [in] n Operand
- *  @return An integer equivalent to (uint64_t)floor(sqrt(n)).
- *  
- *  @details Computes the integer square root of a given integer.
- */
 uint64_t isqrt(uint64_t n) {
     // Base Case: if n < 2, then sqrt(n) = n.
     if (n < 2) return n;
@@ -38,55 +33,32 @@ uint64_t isqrt(uint64_t n) {
     uint64_t s = isqrt(n >> 2) << 1;
     uint64_t l = s + 1;
     
-    if (l*l > n)  // l is too big, so s is the value we want
+    if (l*l > n)
         return s;
     else
         return l;
 }
 
 
-/**
- *  @brief Modular Addition
- *  
- *  @param [in] a Summand
- *  @param [in] b Summand
- *  @param [in] n Modulus
- *  @return (a + b) mod n.
- *  
- *  @details Performs modular addition on two integers with a given modulus.
- *           This implementation is written so as to avoid integer overflow.
- */
 uint64_t mod_add(uint64_t a, uint64_t b, uint64_t n) {
     return ((a % n) + (b % n)) % n;
 }
 
 
-/**
- *  @brief Modular Multiplication
- *  
- *  @param [in] a Multiplicand
- *  @param [in] b Multiplier
- *  @param [in] n Modulus
- *  @return ab mod n.
- *  
- *  @details Performs modular multiplication on two integers with a given
- *           modulus. This implementation is written so as to avoid integer
- *           overflow.
- */
 uint64_t mod_mult(uint64_t a, uint64_t b, uint64_t n) {
-    uint64_t r = 0;  // Remainder, to be returned
+    uint64_t r = 0;  // Remainder
     
     // If a is larger than the modulus, we need to reduce it in order to avoid
     // integer overflow.
     if (a >= n) a %= n;
     
-    // This loop performs modular addition on r until the multiplier is 0.
+    // Perform modular addition on r until the multiplier is 0.
     while (b > 0) {
-        if (b & 1)  // Equivalent to "b % 2 == 1"
+        if (b & 1)
             r = mod_add(r, a, n);
         
         a = (a * 2) % n;
-        b >>= 1;    // Equivalent to "b /= 2"
+        b >>= 1;
     }
     
     // (a * b) mod n == ((a mod n) * (b mod n)) mod n. At this point, we have
@@ -96,66 +68,47 @@ uint64_t mod_mult(uint64_t a, uint64_t b, uint64_t n) {
 }
 
 
-/**
- *  @brief Modular Exponentiation
- *  
- *  @param [in] a Base
- *  @param [in] b Exponent
- *  @param [in] n Modulus
- *  @return a^b mod n.
- *  
- *  @details Performs modular exponentiation on two integers with a given
- *           modulus. This implementation is written so as to avoid integer
- *           overflow.
- */
 uint64_t mod_pow(uint64_t a, uint64_t b, uint64_t n) {
-    uint64_t r = 1;  // Remainder, to be returned
+    uint64_t r = 1;  // Remainder
     
     // If a is larger than the modulus, we need to reduce it in order to avoid
     // integer overflow.
     if (a >= n) a %= n;
     
-    // This loop performs modular multiplication on both the remainder and the
-    // base, until our exponent is 0.
+    // Perform modular multiplication on both the remainder and the base, until
+    // our exponent is 0.
     while (b > 0) {
-        if (b & 1)  // Equivalent to "b % 2 == 1"
+        if (b & 1)
             r = mod_mult(r, a, n);
         
         a = mod_mult(a, a, n);
-        b >>= 1;    // Equivalent to "b /= 2"
+        b >>= 1;
     }
     
     return r;
 }
 
 
-/**
- *  @brief Miller-Rabin Primality Test
- *  
- *  @param [in] n Number to test for primality; must be odd
- *  @param [in] d A divisor of n-1; must be odd
- *  @return Returns true if n is likely prime, or false otherwise.
- *  
- *  @details Performs a non-deterministic primality test on a given integer to
- *           determine if it is composite or (likely) prime.
- */
 bool miller_rabin(uint64_t n, uint64_t d) {
+    // boost::random::random_device rd;
+    // boost::random::mt19937 mt(rd());
+    // boost::random::uniform_int_distribution<uint64_t> dist(2, n-2);
     std::random_device rd;
     std::mt19937 mt(rd());
     std::uniform_int_distribution<uint64_t> dist(2, n-2);
     
-    uint64_t a = dist(mt);          // Randomly select a from [2, n-2]
-    uint64_t x = mod_pow(a, d, n);  // Let x = a^d mod n
+    uint64_t a = dist(mt);
+    uint64_t x = mod_pow(a, d, n);
     
     // Base Case: if a^d mod n is 1 or n-1, then we already know n is prime, so
     // we can return true.
     if (x == 1 || x == n-1)
         return true;
     
-    // This loop performs modular multiplication on x until d is equal to n-1.
+    // Perform modular multiplication on x until d is equal to n-1.
     while (d != (n - 1)) {
         x = mod_mult(x, x, n);
-        d <<= 1;  // Equivalent to "d *= 2"
+        d <<= 1;
         
         if (x == 1) return false;
         if (x == (n - 1)) return true;
@@ -167,33 +120,22 @@ bool miller_rabin(uint64_t n, uint64_t d) {
 }
 
 
-/**
- *  @brief Main Primality Test Algorithm
- *  
- *  @param [in] n Number to test for primality; must be odd
- *  @param [in] k Number of times to repeat the test
- *  @return Returns true if n is likely prime, or false otherwise.
- *  
- *  @details Performs a series of non-deterministic primality tests on a given
- *           integer to determine if it is composite or (likely) prime. If any
- *           test fails, we immediately assume compositeness.
- */
 bool is_prime(uint64_t n, uint64_t k) {
     // Base cases
     if (n <= 1) return false;
     if (n <= 3) return true;
-    if (!(n & 1)) return false;  // Equivalent to "n % 2 == 0"
+    if (!(n & 1)) return false;
     
     // At this point, we know n is odd and greater than 1. Now, our goal is to
     // find an integer d such that n-1 = d * 2^r, where r >= 1. The loop divides
     // d by 2 until it is no longer even - at that point, we will have the value
     // we desire.
     uint64_t d = n - 1;
-    while (!(d & 1))  // Equivalent to "d % 2 == 0"
-        d >>= 1;      // Equivalent to "d /= 2"
+    while (!(d & 1))
+        d >>= 1;
     
-    // This loop calls miller_rabin(n, d) k times. If any of the tests fail, we
-    // know that n is not prime, so we return false.
+    // Call miller_rabin(n, d) k times. If any of the tests fail, we know that n
+    // is not prime, so we return false.
     for (uint64_t i = 0; i < k; ++i) {
         if (!miller_rabin(n, d))
             return false;
@@ -205,16 +147,6 @@ bool is_prime(uint64_t n, uint64_t k) {
 }
 
 
-/**
- *  @brief Sieve of Atkin
- *  
- *  @param [in] n Upper bound for the sieve
- *  @return A list of "integers" marked for primality.
- *  
- *  @details Performs the sieve of Atkin, a variation of the sieve of
- *           Eratosthenes, to generate a list of all primes up to a given upper
- *           bound.
- */
 bool *sieve_of_atkin(uint64_t n) {
     // The new[] operator in C++ makes setup very easy for us.
     bool *data = new bool[n + 1]();

@@ -110,8 +110,8 @@ std::map<uint64_t, uint64_t> factor(uint64_t n) {
 int main(int argc, char **argv) {
     if (argc != 2) {
         std::printf("Usage: factor n\n");
-        std::printf("\tn: Must be no larger than 2^64 - 1\n\n");
-        std::printf("Determines and outputs the prime factorization of a given integer.\n");
+        std::printf("Computes the prime factorization of a given integer.\n\n");
+        std::printf("n\t\tMust be no larger than 2^64 - 1\n");
         std::exit(EXIT_FAILURE);
     }
     

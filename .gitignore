@@ -12,6 +12,7 @@ doc/
 
 # We will ignore any and all Visual Studio files as well.
 .vs/
+.vscode/
 *.VC.db
 *.suo
 *.user

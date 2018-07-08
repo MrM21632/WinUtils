@@ -15,9 +15,9 @@
 int main(int argc, char **argv) {
     if (argc != 3) {
         printf("Usage: tip cost rate\n");
-        printf("\tcost: Initial cost before accounting for tips. (Format: ##.##)\n");
-        printf("\trate: User-selected tip rate. (Format: ##.##)\n\n");
-        printf("Calculates total cost with tip, given an initial cost and desired tip rate.\n");
+        printf("Calculates total cost with tip, given a cost and tip rate.\n\n");
+        printf("cost\t\tInitial cost before tips. Format: ##.##\n");
+        printf("rate\t\tUser-selected tip rate. Format: ##.##\n");
         return EXIT_FAILURE;
     }
     

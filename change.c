@@ -17,10 +17,10 @@
 int main(int argc, char **argv) {
     if (argc != 3) {
         printf("Usage: change cost given\n");
-        printf("\tcost: Total cost. (Format: ##.##)\n");
-        printf("\tgiven: Amount received. (Format: ##.##)\n\n");
-        printf("Calculates change owed given a total cost and amount of money received.\n");
-        printf("NOTE: Supports American currency only.\n");
+        printf("Calculates change owed given a cost and money received.\n\n");
+        printf("cost\t\tTotal cost. Format: ##.##\n");
+        printf("given\t\tAmount received. Format: ##.##\n");
+        printf("NOTE: Currently supports American currency only.\n");
         return EXIT_FAILURE;
     }
     
