@@ -16,10 +16,9 @@
  */
 
 #include <cstdlib>
-#include <random>
-// #include <boost/random/mersenne_twister.hpp>
-// #include <boost/random/random_device.hpp>
-// #include <boost/random/uniform_int_distribution.hpp>
+#include <boost/random/mersenne_twister.hpp>
+#include <boost/random/random_device.hpp>
+#include <boost/random/uniform_int_distribution.hpp>
 #include "prime_utils.h"
 
 
@@ -90,12 +89,9 @@ uint64_t mod_pow(uint64_t a, uint64_t b, uint64_t n) {
 
 
 bool miller_rabin(uint64_t n, uint64_t d) {
-    // boost::random::random_device rd;
-    // boost::random::mt19937 mt(rd());
-    // boost::random::uniform_int_distribution<uint64_t> dist(2, n-2);
-    std::random_device rd;
-    std::mt19937 mt(rd());
-    std::uniform_int_distribution<uint64_t> dist(2, n-2);
+    boost::random::random_device rd;
+    boost::random::mt19937 mt(rd());
+    boost::random::uniform_int_distribution<uint64_t> dist(2, n-2);
     
     uint64_t a = dist(mt);
     uint64_t x = mod_pow(a, d, n);
@@ -148,7 +144,6 @@ bool is_prime(uint64_t n, uint64_t k) {
 
 
 bool *sieve_of_atkin(uint64_t n) {
-    // The new[] operator in C++ makes setup very easy for us.
     bool *data = new bool[n + 1]();
     data[2] = true;
     data[3] = true;

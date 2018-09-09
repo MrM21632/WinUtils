@@ -73,8 +73,8 @@ uint64_t lcm(uint64_t a, uint64_t b) {
 int main(int argc, char **argv) {
     if (argc != 3) {
         std::printf("Usage: gcd_lcm a b\n");
-        std::printf("\ta,b: In the range [0, 2^64)\n\n");
-        std::printf("Compute GCD and LCM for non-negative integers a and b.\n");
+        std::printf("Compute GCD and LCM for non-negative integers a and b.\n\n");
+        std::printf("a,b\t\tIn the range [0, 2^64)\n");
         return EXIT_FAILURE;
     }
 

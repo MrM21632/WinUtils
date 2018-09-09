@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{4EC49426-E697-41A1-9701-8865455CDFA4}</ProjectGuid>
+    <ProjectGuid>{89C92492-5A63-4E2D-B579-94D10A913C77}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>factor</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
@@ -80,6 +80,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\boost-1.67.0-msvc;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\boost-1.67.0-msvc\lib64-msvc-14.0;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -146,13 +148,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\factor_utils.h" />
+    <ClInclude Include="..\prime_utils.h" />
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="..\factor.cpp" />
     <ClCompile Include="..\factor_utils.cpp" />
     <ClCompile Include="..\prime_utils.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\factor_utils.h" />
-    <ClInclude Include="..\prime_utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

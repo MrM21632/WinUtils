@@ -82,8 +82,8 @@ std::string to_english(int64_t n) {
 int main(int argc, char **argv) {
     if (argc != 2) {
         std::cout << "Usage: int_to_eng num\n";
-        std::cout << "\tnum: Number to convert to English, in the range (-(2^63), 2^63)\n\n";
-        std::cout << "Displays the given number in (American) English.\n";
+        std::cout << "Displays the given number in (American) English.\n\n";
+        std::cout << "num\t\tNumber to convert, must be in the range (-(2^63), 2^63)\n";
         return EXIT_FAILURE;
     }
     

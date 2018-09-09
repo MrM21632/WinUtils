@@ -3,23 +3,25 @@
 # Author:      Joshua Morrison (GitHub: MrM21632)
 # Last Edited: 7/7/2018, 10:00pm
 
+CXX ?= g++
 OBJECTS = prime_utils.o factor_utils.o factor.o
 HEADERS = factor_utils.h prime_utils.h
+# Change the extension if you want.
+EXE = factor
 
-default: factor.exe
+default: $(EXE)
 
 prime_utils.o: prime_utils.cpp prime_utils.h
-	g++ -c prime_utils.cpp
-
+	$(CXX) -c prime_utils.cpp
 factor_utils.o: factor_utils.cpp $(HEADERS)
-	g++ -c factor_utils.cpp
-
+	$(CXX) -c factor_utils.cpp
 factor.o: factor.cpp $(HEADERS)
-	g++ -c factor.cpp
+	$(CXX) -c factor.cpp
 
-factor.exe: $(OBJECTS)
-	g++ -o factor.exe $(OBJECTS)
+# Change the names of the Boost library files if they aren't the same
+# on your system as they are below.
+$(EXE): $(OBJECTS)
+	$(CXX) -o $(EXE) $(OBJECTS) -lboost_random -lboost_system
 
 clean:
-	del *.o
-	del factor.exe
+	rm -rf *.o $(EXE)

@@ -8,19 +8,21 @@
  * Last Edited: 1/17/2018, 5:00pm
  */
 
-#include <random>
 #include <cstdint>
 #include <cstdio>
 #include <cstdlib>
 #include <ctime>
+#include <boost/random/mersenne_twister.hpp>
+#include <boost/random/random_device.hpp>
+#include <boost/random/uniform_int_distribution.hpp>
 
 // Constant value used for testing primality; ensures we won't run into any
 // unepxected results.
 #define TEST_NUM (30)
 
 // Constants for random number generation
-std::random_device rd;
-std::mt19937 mt(rd());
+boost::random::random_device rd;
+boost::random::mt19937 mt(rd());
 
 
 /**
@@ -115,7 +117,7 @@ uint64_t mod_pow(uint64_t a, uint64_t b, uint64_t n) {
  *           determine if it is composite or (likely) prime.
  */
 bool miller_rabin(uint64_t n, uint64_t d) {
-    std::uniform_int_distribution<uint64_t> dist(2, n - 2);
+    boost::random::uniform_int_distribution<uint64_t> dist(2, n - 2);
 
     uint64_t a = dist(mt);          // Randomly select a from [2, n-2]
     uint64_t x = mod_pow(a, d, n);  // Let x = a^d mod n
@@ -199,8 +201,8 @@ uint64_t next_prime(uint64_t n) {
 int main(int argc, char **argv) {
     if (argc != 2) {
         std::printf("Usage: prime_test n\n");
-        std::printf("\tn: Number to test; in range [0, 2^64)\n\n");
-        std::printf("Test the given number for primality, then find the next prime number.\n");
+        std::printf("Test the given number for primality, then find the next prime number.\n\n");
+        std::printf("n\t\tNumber to test; in range [0, 2^64)\n");
         std::exit(EXIT_FAILURE);
     }
 

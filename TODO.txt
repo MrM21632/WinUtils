@@ -2,6 +2,3 @@ all:
     - Ensure the variable and method names make sense.
     - Add other compilation options (Makefiles, GCC/G++, Clang, etc.)
     - Make tests for each utility
-
-math_utils/prime_test, weasel
-    - Convert these utilities to C with the PCG algorithms.

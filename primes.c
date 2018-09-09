@@ -109,7 +109,7 @@ int main(int argc, char **argv) {
     if (argc != 2) {
         printf("Usage: primes bound\n");
         printf("Generate a list of primes below a given bound.\n\n");
-        printf("bound\t\tBound for the sieve (Max 2^32 - 1)\n");
+        printf("bound\t\tBound for the sieve (unsigned, max 2^32 - 1)\n");
         
         return EXIT_FAILURE;
     }
@@ -135,6 +135,7 @@ int main(int argc, char **argv) {
     }
     
     fclose(primes_file);
+    free(is_prime);
     clock_t end = clock();
     double time = (double) (end - start) / CLOCKS_PER_SEC;
     

@@ -14,10 +14,12 @@
 
 #include <iostream>
 #include <algorithm>
-#include <random>
 #include <string>
 #include <vector>
 #include <cstdlib>
+#include <boost/random/mersenne_twister.hpp>
+#include <boost/random/random_device.hpp>
+#include <boost/random/uniform_int_distribution.hpp>
 
 
 // Global variables
@@ -27,10 +29,10 @@ int len;                                            // Target string's length
 int chars_len = chars.length();                     // Number of available chars
 
 // For the percentile roller
-std::random_device rd;
-std::mt19937 mt(rd());
-std::uniform_int_distribution<int> percentile(1, 100);
-std::uniform_int_distribution<int> get_char(0, chars_len - 1);
+boost::random::random_device rd;
+boost::random::mt19937 mt(rd());
+boost::random::uniform_int_distribution<int> percentile(1, 100);
+boost::random::uniform_int_distribution<int> get_char(0, chars_len - 1);
 
 
 /**

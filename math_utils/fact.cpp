@@ -61,12 +61,12 @@ void derange(mpz_t res, mpir_ui n) {
 int main(int argc, char **argv) {
     if (argc != 2) {
         std::printf("Usage: fact n\n");
-        std::printf("\tn: The number to perform the calculations for.\n\n");
-        std::printf("Compute various values for a given number, n:\n");
+        std::printf("Compute various values for a given number:\n");
         std::printf("\t- Regular factorial, n!\n");
         std::printf("\t- Double factorial, n!!\n");
         std::printf("\t- Derangement, !n\n");
-        std::printf("\t- Primorial, n# (product of all primes below n)\n");
+        std::printf("\t- Primorial, n# (product of all primes below n)\n\n");
+        std::printf("n\t\tThe number to perform the calculations for.\n");
         std::exit(EXIT_FAILURE);
     }
 

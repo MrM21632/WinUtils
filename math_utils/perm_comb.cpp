@@ -126,10 +126,10 @@ void comb_rep(mpz_t res, mpir_ui n, mpir_ui r) {
 int main(int argc, char **argv) {
     if (argc != 3) {
         std::printf("Usage: perm_comb n r\n");
-        std::printf("\tn: Number of elements to choose from.\n");
-        std::printf("\tr: Number of elements to choose.\n");
-        std::printf("\tNOTE: both n and r are limited to [0, 2^64).\n\n");
-        std::printf("Compute various fundamental combinatoric values.\n");
+        std::printf("Compute various fundamental combinatoric values.\n\n");
+        std::printf("n\t\tNumber of elements to choose from.\n");
+        std::printf("r\t\tNumber of elements to choose.\n\n");
+        std::printf("NOTE: both n and r are limited to [0, 2^64).\n");
         std::exit(EXIT_FAILURE);
     }
 

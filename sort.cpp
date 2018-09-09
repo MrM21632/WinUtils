@@ -71,9 +71,9 @@ void quicksort(std::vector<int64_t> &v, int lo, int hi) {
 
 int main(int argc, char **argv) {
     if (argc != 2) {
-        std::cout << "Usage: sort file" << std::endl;
-        std::cout << "\tfile: File containing numbers to sort (Integers only).\n\n";
-        std::cout << "Sorts a list of integers and outputs the sorted list to a file.\n";
+        std::cout << "Usage: sort file\n";
+        std::cout << "Sorts a list of integers and outputs the sorted list to a file.\n\n";
+        std::cout << "file\t\tFile containing numbers to sort (Integers only).\n";
         return EXIT_FAILURE;
     }
     
