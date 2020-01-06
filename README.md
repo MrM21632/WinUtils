@@ -2,7 +2,7 @@
 
 [![Coverage Status](https://coveralls.io/repos/github/MrM21632/WinUtils/badge.svg?branch=master)](https://coveralls.io/github/MrM21632/WinUtils?branch=master) [![Build Status](https://travis-ci.org/MrM21632/WinUtils.svg?branch=master)](https://travis-ci.org/MrM21632/WinUtils)
 
-This is a collection of command-line utilities originally written for Windows' Command Prompt, but many of the source files included here are portable to UNIX-like (i.e., macOS, BSD, and Linux distros) systems, although some small changes will likely need to be made.
+This is a collection of command-line utilities originally written for Windows' Command Prompt. Many of the source files included here are portable to UNIX-like (i.e., macOS, BSD, and Linux distros) systems, although some small changes will likely need to be made.
 
 These utilities serve a number of varied purposes, mostly related to mathematics. Currently, this repository includes, but is not limited to, the following:
 
